@@ -56,6 +56,11 @@ int main (int argc, char** argv)
 	std::string so = std::string (argv[1]) + "/Contents/x86_64-linux/PunishChild 670.so";
 	void* h = dlopen (so.c_str (), RTLD_NOW | RTLD_LOCAL);
 	if (!h) { std::printf ("dlopen failed: %s\n", dlerror ()); return 2; }
+	// X11-RunLoop der .so initialisieren (dlsym, mangled): _ZN6VSTGUI3X118RunLoop4initEv
+	auto runLoopInit = (void (*)()) dlsym (h, "_ZN6VSTGUI3X118RunLoop4initEv");
+	if (runLoopInit) { runLoopInit (); std::printf ("runloop init ok\n"); }
+	else std::printf ("WARN: RunLoop::init nicht gefunden\n");
+
 	auto getFactory = (IPluginFactory* (*)()) dlsym (h, "GetPluginFactory");
 	auto* factory = getFactory ();
 	PClassInfo ci;
