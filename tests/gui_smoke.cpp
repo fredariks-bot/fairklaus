@@ -69,11 +69,14 @@ int main ()
 	expect (std::fabs (thrDrag - 0.25) < 0.01, "Drag am Threshold-Knopf aendert Parameter (~0.25)");
 
 	// --- Mausrad: deltaY < 0 senkt ---
+	std::printf ("wheel: start\n");
 	{
 		VSTGUI::MouseWheelEvent wheel;
 		wheel.mousePosition = VSTGUI::CPoint (525, 110);
 		wheel.deltaY = -1.0;
+		std::printf ("wheel: event gebaut\n");
 		knob.onMouseWheelEvent (wheel);
+		std::printf ("wheel: handler fertig\n");
 	}
 	const double thrWheel = ctrl->getParamNormalized (fairklaus::kParamThreshold);
 	std::printf ("thr nach Wheel = %.4f\n", thrWheel);
