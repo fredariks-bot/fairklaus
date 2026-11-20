@@ -33,7 +33,7 @@ class PunishChild660;
 class KnobControl : public VSTGUI::CControl
 {
 public:
-	KnobControl (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, int32 tag);
+	KnobControl (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, Steinberg::int32 tag);
 	void draw (VSTGUI::CDrawContext* ctx) override;
 	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
 	VSTGUI::CMouseEventResult onMouseMoved (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
@@ -49,7 +49,7 @@ private:
 class SwitchControl : public VSTGUI::CControl
 {
 public:
-	SwitchControl (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, int32 tag);
+	SwitchControl (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, Steinberg::int32 tag);
 	void draw (VSTGUI::CDrawContext* ctx) override;
 	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
 	CLASS_METHODS_NOCOPY (SwitchControl, VSTGUI::CControl)
@@ -108,9 +108,6 @@ public:
 	bool PLUGIN_API open (void* parent, const VSTGUI::PlatformType& platformType) override;
 	void PLUGIN_API close () override;
 	void doIdleStuff () override;
-
-	// vom Processor bei Parameter-Änderungen (Host/Automation)
-	void onParameterChanged (Steinberg::Vst::ParamID id, double normalized);
 
 	// IControlListener
 	void valueChanged (VSTGUI::CControl* pControl) override;

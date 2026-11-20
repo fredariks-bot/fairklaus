@@ -76,7 +76,7 @@ CMouseEventResult KnobControl::onMouseDown (CPoint& where, const CButtonState& b
 	if (buttons.isLeftButton ())
 	{
 		lastY = where.y;
-		if (listener) listener->beginEdit (getTag ());
+		beginEdit ();
 		return kMouseEventHandled;
 	}
 	return kMouseEventHandled;
@@ -97,7 +97,7 @@ CMouseEventResult KnobControl::onMouseMoved (CPoint& where, const CButtonState& 
 
 CMouseEventResult KnobControl::onMouseUp (CPoint&, const CButtonState&)
 {
-	if (listener) listener->endEdit (getTag ());
+	endEdit ();
 	return kMouseEventHandled;
 }
 
@@ -133,10 +133,10 @@ CMouseEventResult SwitchControl::onMouseDown (CPoint&, const CButtonState& butto
 {
 	if (buttons.isLeftButton ())
 	{
-		if (listener) listener->beginEdit (getTag ());
+		beginEdit ();
 		setValueNormalized (getValueNormalized () > 0.5 ? 0.0 : 1.0);
 		valueChanged ();
-		if (listener) listener->endEdit (getTag ());
+		endEdit ();
 		return kMouseEventHandled;
 	}
 	return kMouseEventHandled;
@@ -354,36 +354,34 @@ void PanelEditor::doIdleStuff ()
 	}
 	if (panel)
 	{
-		auto* ctrl = static_cast<IEditController*> (processor);
+		auto* ctrl = static_cast<EditController*> (processor);
 		panel->lampOn = ctrl->getParamNormalized (kParamPower) > 0.5;
+		auto sync = [&] (VSTGUI::CControl* c, Steinberg::Vst::ParamID id)
+		{
+			if (c)
+			{
+				const auto v = (float) ctrl->getParamNormalized (id);
+				if (v != c->getValueNormalized ()) c->setValueNormalized (v);
+			}
+		};
+		sync (panel->knobInput, kParamInputGain);
+		sync (panel->knobThreshold, kParamThreshold);
+		sync (panel->knobTimeConst, kParamTimeConstant);
+		sync (panel->knobOutput, kParamOutputGain);
+		sync (panel->swPower, kParamPower);
+		sync (panel->swMains, kParamMains);
 		panel->setDirty ();
 	}
 }
 
-void PanelEditor::onParameterChanged (ParamID id, double normalized)
-{
-	if (!panel) return;
-	VSTGUI::CControl* c = nullptr;
-	switch (id)
-	{
-		case kParamInputGain: c = panel->knobInput; break;
-		case kParamThreshold: c = panel->knobThreshold; break;
-		case kParamTimeConstant: c = panel->knobTimeConst; break;
-		case kParamOutputGain: c = panel->knobOutput; break;
-		case kParamPower: c = panel->swPower; break;
-		case kParamMains: c = panel->swMains; break;
-		default: return;
-	}
-	if (c) c->setValueNormalized ((float) normalized);
-}
-
 void PanelEditor::valueChanged (VSTGUI::CControl* pControl)
 {
-	const int32 tag = pControl->getTag ();
-	beginEdit (tag);
-	static_cast<IEditController*> (processor)->setParamNormalized (tag, pControl->getValueNormalized ());
-	static_cast<IEditController*> (processor)->performEdit (tag);
-	endEdit (tag);
+	const auto tag = (Steinberg::Vst::ParamID) pControl->getTag ();
+	auto* ec = static_cast<EditController*> (processor);
+	ec->beginEdit (tag);
+	ec->setParamNormalized (tag, pControl->getValueNormalized ());
+	ec->performEdit (tag, ec->getParamNormalized (tag));
+	ec->endEdit (tag);
 }
 
 } // namespace fairklaus
