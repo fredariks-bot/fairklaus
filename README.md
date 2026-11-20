@@ -78,6 +78,12 @@ Ergebnis: `build/VST3/Release/PunishChild 660.vst3`
 (auf macOS/Windows analog unter dem jeweiligen Build-Ordner; Installation durch Kopieren
 in den VST3-Ordner des Hosts).
 
+**Windows (x64):** lokal mit Visual Studio 2022 + CMake (`cmake -B build -A x64
+-DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release`), Ergebnis unter
+`build/VST3/Release/PunishChild 660.vst3` (enthält `Contents/x86_64-win/`). Fertige
+Windows-Builds liefert außerdem die GitHub-Actions-CI als Artefakt
+`PunishChild-660-vst3-windows-x64` (siehe Reiter „Actions" bzw. PR #1).
+
 ## Tests
 
 ```bash

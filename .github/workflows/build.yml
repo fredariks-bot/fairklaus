@@ -40,5 +40,35 @@ jobs:
       - name: Plugin-Bundle als Artefakt
         uses: actions/upload-artifact@v4
         with:
-          name: PunishChild-660-vst3
+          name: PunishChild-660-vst3-linux-x64
+          path: build/VST3/Release/PunishChild 660.vst3
+
+  #--- Windows x64 (MSVC) ------------------------------------------------------
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout (inkl. vst3sdk-Submodul)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: CMake konfigurieren
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Bauen
+        run: cmake --build build --config Release -j
+
+      - name: Tests (DSP)
+        run: cd build && ctest -C Release --output-on-failure
+
+      - name: VST3 SDK Validator
+        shell: pwsh
+        run: |
+          $v = Get-ChildItem -Recurse build -Filter validator.exe | Select-Object -First 1
+          & $v.FullName "build/VST3/Release/PunishChild 660.vst3"
+
+      - name: Windows-VST3 als Artefakt
+        uses: actions/upload-artifact@v4
+        with:
+          name: PunishChild-660-vst3-windows-x64
           path: build/VST3/Release/PunishChild 660.vst3
