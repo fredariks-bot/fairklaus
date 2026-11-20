@@ -20,6 +20,7 @@
 #include "vstgui/lib/cframe.h"
 #include "vstgui/lib/events.h"
 #include "vstgui/lib/platform/linux/x11platform.h"
+#include "vstgui/lib/platform/platformfactory.h"
 
 #include "Parameters.h"
 #include "PunishChild670.h"
@@ -58,6 +59,7 @@ int main (int argc, char** argv)
 	XFlush (dpy);
 
 	(void) argc; (void) argv;
+	VSTGUI::initPlatform (nullptr);   // sonst ist die Platform-Factory null -> Segfault
 	VSTGUI::X11::RunLoop::init ();   // eine einzige vstgui-Kopie (direkt gelinkt)
 	std::printf ("runloop init ok\n");
 
@@ -132,6 +134,7 @@ int main (int argc, char** argv)
 	comp->release ();
 	XDestroyWindow (dpy, win);
 	XCloseDisplay (dpy);
+	VSTGUI::exitPlatform ();
 
 	if (failures) { std::printf ("GUI SMOKE: %d FAILED\n", failures); return 1; }
 	std::printf ("GUI SMOKE: all ok\n");
