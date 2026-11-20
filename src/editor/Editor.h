@@ -34,6 +34,7 @@ class KnobControl : public VSTGUI::CControl
 {
 public:
 	KnobControl (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, Steinberg::int32 tag);
+	void setDetents (int n) { detents = n; }   // n Stufen -> rastet beim Ziehen ein (z.B. 5 fuer Time Constant)
 	void draw (VSTGUI::CDrawContext* ctx) override;
 	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
 	VSTGUI::CMouseEventResult onMouseMoved (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
@@ -41,7 +42,13 @@ public:
 	void onMouseWheelEvent (VSTGUI::MouseWheelEvent& event) override;
 	CLASS_METHODS_NOCOPY (KnobControl, VSTGUI::CControl)
 private:
+	double snap (double v) const
+	{
+		if (detents > 1) v = std::round (v * (detents - 1)) / (detents - 1);
+		return v;
+	}
 	double lastY = 0.0;
+	int detents = 0;
 };
 
 //------------------------------------------------------------------------

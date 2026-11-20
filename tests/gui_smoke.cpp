@@ -49,7 +49,6 @@ static void expect (bool ok, const char* what)
 int main (int argc, char** argv)
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
-	if (argc < 2) { std::printf ("usage: gui_smoke <plugin.vst3>\n"); return 2; }
 
 	Display* dpy = XOpenDisplay (nullptr);   // xvfb-run setzt DISPLAY
 	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
