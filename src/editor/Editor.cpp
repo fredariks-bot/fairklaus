@@ -345,6 +345,25 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	return true;
 }
 
+tresult PLUGIN_API PanelEditor::canResize ()
+{
+	return kResultTrue;
+}
+
+tresult PLUGIN_API PanelEditor::onSize (Steinberg::Vst::ViewRect* newSize)
+{
+	if (frame && newSize)
+	{
+		double z = (newSize->right - newSize->left) / kPanelW;
+		if (z < 0.5) z = 0.5;
+		if (z > 4.0) z = 4.0;
+		frame->setZoom (z);
+		newSize->right = newSize->left + (int32) (kPanelW * z + 0.5);
+		newSize->bottom = newSize->top + (int32) (kPanelH * z + 0.5);
+	}
+	return VSTGUIEditor::onSize (newSize);
+}
+
 void PLUGIN_API PanelEditor::close ()
 {
 	if (processor) processor->unregisterEditor (this);

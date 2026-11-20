@@ -9,6 +9,7 @@ des Fairchild 670 Limiters nach:
 Das Panel („PunishChild 660") entspricht der Referenzgrafik: VU-Meter (Gain Reduction),
 vier Drehregler (INPUT GAIN, THRESHOLD, TIME CONSTANT, OUTPUT GAIN), Netzschalter mit
 Kontrolllampe und MAINS-Umschalter (50/60 Hz).
+Die Oberfläche ist skalierbar (50–400 %, Host-Fenster einfach in der Ecke ziehen).
 
 ## Modell → Code (Paper-Abbildungen)
 
