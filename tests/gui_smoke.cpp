@@ -50,7 +50,7 @@ int main ()
 
 	auto* editor = new fairklaus::PanelEditor (static_cast<fairklaus::PunishChild670*> (comp));
 
-	VSTGUI::CButtonState leftBtn (kLeftButton);
+	VSTGUI::CButtonState leftBtn (VSTGUI::kLeftButton);
 	VSTGUI::CButtonState noBtn (0);
 	VSTGUI::CPoint p0 (0, 0);
 
