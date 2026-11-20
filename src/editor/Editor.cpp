@@ -350,7 +350,7 @@ tresult PLUGIN_API PanelEditor::canResize ()
 	return kResultTrue;
 }
 
-tresult PLUGIN_API PanelEditor::onSize (Steinberg::Vst::ViewRect* newSize)
+tresult PLUGIN_API PanelEditor::onSize (Steinberg::ViewRect* newSize)
 {
 	if (frame && newSize)
 	{

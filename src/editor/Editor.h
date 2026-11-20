@@ -110,7 +110,7 @@ public:
 
 	// skalierbare Oberflaeche: Host darf Fenster Groesse aendern, wir zoomen das Panel
 	Steinberg::tresult PLUGIN_API canResize () override;
-	Steinberg::tresult PLUGIN_API onSize (Steinberg::Vst::ViewRect* newSize) override;
+	Steinberg::tresult PLUGIN_API onSize (Steinberg::ViewRect* newSize) override;
 	VSTGUI::CMessageResult notify (VSTGUI::CBaseObject* sender, const char* message) override;
 
 	// IControlListener
