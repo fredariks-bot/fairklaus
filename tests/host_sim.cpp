@@ -20,6 +20,9 @@
 #include "pluginterfaces/vst/ivstparameterchanges.h"
 #include "pluginterfaces/vst/vsttypes.h"
 #include "pluginterfaces/base/ibstream.h"
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 using namespace Steinberg;
 using namespace Steinberg::Vst;

@@ -11,6 +11,9 @@
 #include "dsp/Triode6386.h"
 #include "dsp/WdfTransformer.h"
 #include "dsp/Fairchild670.h"
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 using namespace fairklaus;
 
