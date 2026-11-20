@@ -26,9 +26,9 @@ namespace fairklaus {
 // numerisch stabiles softplus: ln(1+exp(x))
 inline double softplus (double x)
 {
-	if (x > 40.0) return x;
-	if (x < -40.0) return 0.0;
-	return std::log1p (std::exp (x));
+	if (x > 20.0) return x;        // Fehler < 2e-9
+	if (x < -20.0) return 0.0;
+	return (double) std::log1pf (std::expf ((float) x));
 }
 
 struct Sidechain

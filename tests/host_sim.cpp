@@ -1,9 +1,9 @@
 //=============================================================================
 // fairklaus — host_sim: minimaler VST3-Host (dlopen) zum Offline-Test des
-// gebauten PunishChild 660 .vst3: Factory -> Component -> IAudioProcessor,
+// gebauten PunishChild 670 .vst3: Factory -> Component -> IAudioProcessor,
 // Parameter setzen, Blöcke prozessieren, Gain Reduction + Bypass prüfen.
 //
-// Aufruf: host_sim <Pfad zum PunishChild 660.vst3>
+// Aufruf: host_sim <Pfad zum PunishChild 670.vst3>
 //=============================================================================
 #include <cstdio>
 #include <cstring>
@@ -36,9 +36,9 @@ static void expect (bool ok, const char* what)
 
 int main (int argc, char** argv)
 {
-	if (argc < 2) { std::printf ("usage: host_sim <PunishChild 660.vst3>\n"); return 2; }
+	if (argc < 2) { std::printf ("usage: host_sim <PunishChild 670.vst3>\n"); return 2; }
 	std::string bundle = argv[1];
-	std::string so = bundle + "/Contents/x86_64-linux/PunishChild 660.so";
+	std::string so = bundle + "/Contents/x86_64-linux/PunishChild 670.so";
 	void* h = dlopen (so.c_str (), RTLD_NOW | RTLD_LOCAL);
 	if (!h) { std::printf ("dlopen failed: %s\n", dlerror ()); return 2; }
 

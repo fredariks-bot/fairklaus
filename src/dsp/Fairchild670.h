@@ -39,7 +39,12 @@ struct Fairchild670
 		fsBase = fs;
 		oversampling = osFactor < 1 ? 1 : osFactor;
 		const double fsOs = fsBase * oversampling;
-		os.setup (oversampling);
+		osL.setup (oversampling);
+		osR.setup (oversampling);
+		hiL.resize ((size_t) oversampling);
+		hiR.resize ((size_t) oversampling);
+		grCounter = 0;
+		scCounter = 0;
 		ampL.setSampleRate (fsOs);
 		ampR.setSampleRate (fsOs);
 		scL.setSampleRate (fsOs);
@@ -86,18 +91,37 @@ struct Fairchild670
 	void processBlock (const double* inL, const double* inR, double* outL, double* outR, int n)
 	{
 		const int N = oversampling;
-		hiL.resize ((size_t) N);
-		hiR.resize ((size_t) N);
+		// Idle-Skip: Eingang exakt 0 und Modell im Ruhezustand -> DSP sparen
+		double maxIn = 0.0;
 		for (int i = 0; i < n; ++i)
 		{
-			os.upsampleInto (inputScale * inL[i], hiL);
-			os.upsampleInto (inputScale * inR[i], hiR);
+			const double a = std::fabs (inL[i]), b = std::fabs (inR[i]);
+			if (a > maxIn) maxIn = a;
+			if (b > maxIn) maxIn = b;
+		}
+		if (maxIn == 0.0 && std::fabs (vsc) < 1e-9
+		    && std::fabs (voutLPrev) < 1e-9 && std::fabs (voutRPrev) < 1e-9)
+		{
+			for (int i = 0; i < n; ++i) { outL[i] = 0.0; outR[i] = 0.0; }
+			grSmooth = 0.0;
+			return;
+		}
+		const double ripple = 0.05;   // 50 mV Netzbrumm (2x mains) auf der 240V-Schiene
+		for (int i = 0; i < n; ++i)
+		{
+			psuPhase += 2.0 * M_PI * (2.0 * mainsHz) / fsBase;
+			ampL.push.setPsuRipple (psuPhase);
+			ampL.pull.setPsuRipple (psuPhase);
+			ampR.push.setPsuRipple (psuPhase);
+			ampR.pull.setPsuRipple (psuPhase);
+			osL.upsampleInto (inputScale * inL[i], hiL);
+			osR.upsampleInto (inputScale * inR[i], hiR);
 			for (int k = 0; k < N; ++k)
 			{
 				double oL, oR;
 				processOs (hiL[k], hiR[k], oL, oR);
-				os.downsample (outputScale * oL, [&] (double v) { outL[i] = v; });
-				os.downsample (outputScale * oR, [&] (double v) { outR[i] = v; });
+				osL.downsample (outputScale * oL, [&] (double v) { outL[i] = v; });
+				osR.downsample (outputScale * oR, [&] (double v) { outR[i] = v; });
 			}
 		}
 	}
@@ -105,25 +129,18 @@ struct Fairchild670
 	// Ein einzelner Modellschritt bei der überabgetasteten Rate
 	void processOs (double inL, double inR, double& outL, double& outR)
 	{
-		const double fsOs = fsBase * oversampling;
-		psuPhase += 2.0 * M_PI * (2.0 * mainsHz) / fsOs;  // Netzbrumm (2x mains) auf 240V
-		const double ripple = 0.05;                        // 50 mV — unhörbar, nur Modell-Treue
-		ampL.push.psuRippleAmp = ampL.pull.psuRippleAmp = ripple;
-		ampR.push.psuRippleAmp = ampR.pull.psuRippleAmp = ripple;
-		ampL.push.setPsuRipple (psuPhase);
-		ampL.pull.setPsuRipple (psuPhase);
-		ampR.push.setPsuRipple (psuPhase);
-		ampR.pull.setPsuRipple (psuPhase);
 
-		// 1) Sidechain tastet Vout(t-1) ab (Feedback, Gl. 13 mit z^-1 auf Vsc)
+		// 1)+2) Sidechain + Zeitkonstanten-Netzwerk laufen auf Basisrate
+		// (Vsc ist durch das TC-Netzwerk ohnehin träge; spart 7/8 der Rechenlast)
 		dbgVscUsed = vsc;
-		const double iscL = scL.process (voutLPrev, vsc);
-		const double iscR = scR.process (voutRPrev, vsc);
-		const double isc  = 0.5 * (iscL + iscR);           // Stereo-Linked
-		dbgIsc = isc; dbgVoutPrev = voutLPrev;
-
-		// 2) Zeitkonstanten-Netzwerk (WDF) -> Vsc
-		const double vscNew = tc.process (isc);
+		if ((scCounter++ & (oversampling - 1)) == 0)
+		{
+			const double iscL = scL.process (voutLPrev, vsc);
+			const double iscR = scR.process (voutRPrev, vsc);
+			const double isc  = 0.5 * (iscL + iscR);       // Stereo-Linked
+			dbgIsc = isc; dbgVoutPrev = voutLPrev;
+			vsc = tc.process (isc);                        // Zeitkonstanten-Netzwerk (WDF)
+		}
 
 		// 3) Signalverstärker mit Vx = Vbias - Vsc(t-1)
 		outL = ampL.process (inL, vsc);
@@ -131,17 +148,19 @@ struct Fairchild670
 
 		voutLPrev = outL;
 		voutRPrev = outR;
-		vsc = vscNew;
 
-		// Gain-Reduction für Anzeige (geglättet, Mittel beider Kanäle)
-		const double gr = 0.5 * (ampL.gainReductionDb (iaRestL) + ampR.gainReductionDb (iaRestR));
-		const double c = gr > grSmooth ? std::exp (-1.0 / (0.005 * fsOs))   // Attack ~5 ms
-		                               : std::exp (-1.0 / (0.300 * fsOs));  // Release ~300 ms
-		grSmooth += (gr - grSmooth) * (1.0 - c);
+		// Gain-Reduction für Anzeige nur auf Basisrate (jedes N-te Sample)
+		if ((grCounter++ & (oversampling - 1)) == 0)
+		{
+			const double gr = 0.5 * (ampL.gainReductionDb (iaRestL) + ampR.gainReductionDb (iaRestR));
+			const double c = gr > grSmooth ? std::exp (-1.0 / (0.005 * fsBase))   // Attack ~5 ms
+			                               : std::exp (-1.0 / (0.300 * fsBase));  // Release ~300 ms
+			grSmooth += (gr - grSmooth) * (1.0 - c);
+		}
 	}
 
 	double gainReductionDb () const { return grSmooth; }   // für VU-Meter
-	double latencySamples () const { return os.latencyBase; }
+	double latencySamples () const { return osL.latencyBase; }
 
 private:
 	void warmup (double seconds)
@@ -156,8 +175,10 @@ private:
 	SignalAmplifier ampL { 44100.0 }, ampR { 44100.0 };
 	Sidechain scL { 44100.0 }, scR { 44100.0 };
 	TimeConstantNetwork tc { 44100.0 };
-	Oversampler os;
+	Oversampler osL, osR;
 	std::vector<double> hiL, hiR;
+	int grCounter = 0;
+	int scCounter = 0;
 	double vsc = 0.0;
 public:
 	double dbgVsc () const { return vsc; }

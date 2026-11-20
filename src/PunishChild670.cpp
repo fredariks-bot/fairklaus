@@ -1,7 +1,7 @@
 //=============================================================================
-// fairklaus — PunishChild 660: Implementierung + Factory
+// fairklaus — PunishChild 670: Implementierung + Factory
 //=============================================================================
-#include "PunishChild660.h"
+#include "PunishChild670.h"
 #include "version.h"
 
 #include "public.sdk/source/main/pluginfactory.h"
@@ -25,10 +25,10 @@ namespace fairklaus {
 
 //------------------------------------------------------------------------
 // Klass-ID des Plugins (stabil halten!)
-static const FUID kPunishChild660ProcessorID (0xF41A6670, 0x66660001, 0x4B1A55C0, 0xDEADBEEF);
+static const FUID kPunishChild670ProcessorID (0xF41A6670, 0x66660001, 0x4B1A55C0, 0xDEADBEEF);
 
 //------------------------------------------------------------------------
-PunishChild660::PunishChild660 ()
+PunishChild670::PunishChild670 ()
 {
 	// Busse: 1x Stereo In, 1x Stereo Out
 	addAudioInput (STR ("Audio In"), SpeakerArr::kStereo, kMain, BusInfo::kDefaultActive);
@@ -39,11 +39,6 @@ PunishChild660::PunishChild660 ()
 	                                  0., 1., 1., 1,
 	                                  ParameterInfo::kCanAutomate | ParameterInfo::kIsList);
 	parameters.addParameter (power);
-
-	auto* mains = new RangeParameter (STR ("Mains"), kParamMains, STR ("Hz"),
-	                                  50., 60., 60., 1,
-	                                  ParameterInfo::kCanAutomate | ParameterInfo::kIsList);
-	parameters.addParameter (mains);
 
 	parameters.addParameter (new RangeParameter (STR ("Input Gain"), kParamInputGain, STR ("dB"),
 	                                             0., 20., 0., kStepCountContinuous,
@@ -68,10 +63,10 @@ PunishChild660::PunishChild660 ()
 }
 
 //------------------------------------------------------------------------
-PunishChild660::~PunishChild660 () = default;
+PunishChild670::~PunishChild670 () = default;
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::initialize (FUnknown* context)
+tresult PLUGIN_API PunishChild670::initialize (FUnknown* context)
 {
 	tresult res = SingleComponentEffect::initialize (context);
 	if (res != kResultOk) return res;
@@ -80,13 +75,13 @@ tresult PLUGIN_API PunishChild660::initialize (FUnknown* context)
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::terminate ()
+tresult PLUGIN_API PunishChild670::terminate ()
 {
 	return SingleComponentEffect::terminate ();
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::setActive (TBool state)
+tresult PLUGIN_API PunishChild670::setActive (TBool state)
 {
 	active = state;
 	if (state)
@@ -99,7 +94,7 @@ tresult PLUGIN_API PunishChild660::setActive (TBool state)
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::setupProcessing (ProcessSetup& setup)
+tresult PLUGIN_API PunishChild670::setupProcessing (ProcessSetup& setup)
 {
 	sampleRate = setup.sampleRate;
 	model.setSampleRate (sampleRate, 8);
@@ -107,13 +102,13 @@ tresult PLUGIN_API PunishChild660::setupProcessing (ProcessSetup& setup)
 }
 
 //------------------------------------------------------------------------
-uint32 PLUGIN_API PunishChild660::getLatencySamples ()
+uint32 PLUGIN_API PunishChild670::getLatencySamples ()
 {
 	return (uint32) std::ceil (model.latencySamples ());
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::setParamNormalized (Steinberg::Vst::ParamID id, ParamValue value)
+tresult PLUGIN_API PunishChild670::setParamNormalized (Steinberg::Vst::ParamID id, ParamValue value)
 {
 	tresult res = SingleComponentEffect::setParamNormalized (id, value);
 	if (res == kResultOk)
@@ -124,7 +119,7 @@ tresult PLUGIN_API PunishChild660::setParamNormalized (Steinberg::Vst::ParamID i
 }
 
 //------------------------------------------------------------------------
-void PunishChild660::applyParameter (Steinberg::Vst::ParamID id, double normalized)
+void PunishChild670::applyParameter (Steinberg::Vst::ParamID id, double normalized)
 {
 	auto* p = parameters.getParameter (id);
 	if (!p) return;
@@ -132,7 +127,6 @@ void PunishChild660::applyParameter (Steinberg::Vst::ParamID id, double normaliz
 	switch (id)
 	{
 		case kParamPower: powerTarget = plain > 0.5 ? 1.0 : 0.0; break;
-		case kParamMains: model.setMainsHz (plain); break;
 		case kParamInputGain: inputGainLin = std::pow (10.0, plain / 20.0); break;
 		case kParamThreshold: model.setThreshold (plain); break;
 		case kParamTimeConstant: model.setTimeConstantPos ((int) plain + 0.5); break;
@@ -153,7 +147,7 @@ void PunishChild660::applyParameter (Steinberg::Vst::ParamID id, double normaliz
 }
 
 //------------------------------------------------------------------------
-void PunishChild660::applyParameters ()
+void PunishChild670::applyParameters ()
 {
 	for (uint32 i = 0; i < parameters.getParameterCount (); ++i)
 		applyParameter ((Steinberg::Vst::ParamID) parameters.getParameterByIndex (i)->getInfo ().id,
@@ -161,7 +155,7 @@ void PunishChild660::applyParameters ()
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::process (ProcessData& data)
+tresult PLUGIN_API PunishChild670::process (ProcessData& data)
 {
 	if (!active || data.numOutputs == 0 || data.numInputs == 0) return kResultOk;
 
@@ -191,9 +185,9 @@ tresult PLUGIN_API PunishChild660::process (ProcessData& data)
 
 	const bool sample64 = (data.symbolicSampleSize == kSample64);
 
-	// Eingabepuffer (double)
+	// Eingabepuffer (double, wiederverwendet)
 	const int32 nCh = std::min (numChannels, 2);
-	std::vector<double> bufL (numSamples), bufR (numSamples);
+	if ((int32) bufL.size () < numSamples) { bufL.resize (numSamples); bufR.resize (numSamples); }
 	auto readCh = [&] (int ch, int i) -> double {
 		if (sample64) return ((Sample64*) inBus->channelBuffers64[ch])[i];
 		return ((Sample32*) inBus->channelBuffers32[ch])[i];
@@ -204,27 +198,41 @@ tresult PLUGIN_API PunishChild660::process (ProcessData& data)
 		bufR[i] = nCh > 1 ? readCh (1, i) : bufL[i];
 	}
 
-	// M/S wenn gewünscht
+	// M/S wenn gewünscht (in proc-Puffer, bufL/bufR bleiben Bypass-Identity)
 	const bool midside = parameters.getParameter (kParamStereoMode)->toPlain (
 		parameters.getParameter (kParamStereoMode)->getNormalized ()) > 0.5;
-	if (midside)
+	if ((int32) procL.size () < numSamples) { procL.resize (numSamples); procR.resize (numSamples); }
+	const double gIn = inputGainLin;
+	const double ms = 1.0 / std::sqrt (2.0);
+	for (int i = 0; i < numSamples; ++i)
 	{
-		const double s = 1.0 / std::sqrt (2.0);
-		for (int i = 0; i < numSamples; ++i)
-		{
-			double l = bufL[i], r = bufR[i];
-			bufL[i] = (l + r) * s;
-			bufR[i] = (l - r) * s;
-		}
+		double l = bufL[i] * gIn, r = bufR[i] * gIn;
+		if (midside) { const double a = l, b = r; l = (a + b) * ms; r = (a - b) * ms; }
+		procL[i] = l; procR[i] = r;
 	}
 
-	// Eingangsverstärkung (geglättet) anwenden
-	std::vector<double> procL (numSamples), procR (numSamples);
-	const double gIn = inputGainLin;
-	for (int i = 0; i < numSamples; ++i) { procL[i] = bufL[i] * gIn; procR[i] = bufR[i] * gIn; }
+	// Power voll aus -> Bypass ohne DSP
+	if (powerTarget <= 0.0 && powerMix <= 0.0)
+	{
+		for (int i = 0; i < numSamples; ++i)
+		{
+			if (sample64)
+			{
+				((Sample64*) outBus->channelBuffers64[0])[i] = nCh > 0 ? (Sample64) bufL[i] : 0.0;
+				if (nCh > 1) ((Sample64*) outBus->channelBuffers64[1])[i] = (Sample64) bufR[i];
+			}
+			else
+			{
+				((Sample32*) outBus->channelBuffers32[0])[i] = nCh > 0 ? (Sample32) bufL[i] : 0.0f;
+				if (nCh > 1) ((Sample32*) outBus->channelBuffers32[1])[i] = (Sample32) bufR[i];
+			}
+		}
+		grForMeter.store (0.0f);
+		return kResultOk;
+	}
 
 	// Modell
-	std::vector<double> outL (numSamples), outR (numSamples);
+	if ((int32) outL.size () < numSamples) { outL.resize (numSamples); outR.resize (numSamples); }
 	model.processBlock (procL.data (), procR.data (), outL.data (), outR.data (), numSamples);
 
 	// Ausgangsverstärkung + Power-Bypass-Mischung (geglättet, ~5 ms)
@@ -280,7 +288,7 @@ tresult PLUGIN_API PunishChild660::process (ProcessData& data)
 static const int32 kStateMagic = 0x464B3636;   // "FK66"
 static const int32 kStateVersion = 1;
 
-tresult PLUGIN_API PunishChild660::getState (IBStream* state)
+tresult PLUGIN_API PunishChild670::getState (IBStream* state)
 {
 	int32 magicOut = kStateMagic, versionOut = kStateVersion;
 	if (state->write (&magicOut, sizeof (magicOut)) != kResultOk) return kResultFalse;
@@ -297,7 +305,7 @@ tresult PLUGIN_API PunishChild660::getState (IBStream* state)
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API PunishChild660::setState (IBStream* state)
+tresult PLUGIN_API PunishChild670::setState (IBStream* state)
 {
 	int32 magic = 0, version = 0;
 	if (state->read (&magic, sizeof (magic)) != kResultOk || magic != kStateMagic) return kResultFalse;
@@ -316,7 +324,7 @@ tresult PLUGIN_API PunishChild660::setState (IBStream* state)
 }
 
 //------------------------------------------------------------------------
-IPlugView* PLUGIN_API PunishChild660::createView (FIDString name)
+IPlugView* PLUGIN_API PunishChild670::createView (FIDString name)
 {
 #if defined(FAIRKLAUS_WITH_EDITOR)
 	if (strcmp (name, ViewType::kEditor) == 0)
@@ -332,9 +340,9 @@ IPlugView* PLUGIN_API PunishChild660::createView (FIDString name)
 }
 
 //------------------------------------------------------------------------
-FUnknown* createPunishChild660Instance (void*)
+FUnknown* createPunishChild670Instance (void*)
 {
-	return static_cast<Steinberg::Vst::IComponent*> (new PunishChild660 ());
+	return static_cast<Steinberg::Vst::IComponent*> (new PunishChild670 ());
 }
 
 } // namespace fairklaus
@@ -344,7 +352,7 @@ FUnknown* createPunishChild660Instance (void*)
 //------------------------------------------------------------------------
 BEGIN_FACTORY_DEF (stringCompanyName, stringCompanyWeb, stringCompanyEmail)
 
-DEF_CLASS2 (INLINE_UID_FROM_FUID (fairklaus::kPunishChild660ProcessorID),
+DEF_CLASS2 (INLINE_UID_FROM_FUID (fairklaus::kPunishChild670ProcessorID),
             Steinberg::PClassInfo::kManyInstances,
             kVstAudioEffectClass,
             stringPluginName,
@@ -352,6 +360,6 @@ DEF_CLASS2 (INLINE_UID_FROM_FUID (fairklaus::kPunishChild660ProcessorID),
             "Fx|Compressor",
             FULL_VERSION_STR,
             kVstVersionString,
-            fairklaus::createPunishChild660Instance)
+            fairklaus::createPunishChild670Instance)
 
 END_FACTORY

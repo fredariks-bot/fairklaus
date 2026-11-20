@@ -26,7 +26,8 @@ struct Oversampler
 	std::vector<double> h;      // FIR bei der hohen Abtastrate, DC-Gain = 1
 	int tapsPerPhase = 48;
 	std::vector<double> upHist;   // Eingangshistorie (Basisrate), Länge tapsPerPhase
-	std::vector<double> dnHist;   // Historie bei hoher Abtastrate, Länge h.size()
+	std::vector<double> dnHist;   // Ringpuffer bei hoher Abtastrate, Länge h.size()
+	int dnPos = 0;
 	int upCount = 0;
 	double latencyBase = 0.0;     // Gruppenlaufzeit in Basis-Samples
 
@@ -73,6 +74,7 @@ struct Oversampler
 		for (auto& v : h) v /= dc;                            // DC-Gain = 1
 		upHist.assign (tapsPerPhase, 0.0);
 		dnHist.assign (L, 0.0);
+		dnPos = 0;
 		upCount = 0;
 		latencyBase = (double) M / (2.0 * factor);            // Gruppenlaufzeit in Basissamples
 	}
@@ -103,12 +105,19 @@ struct Oversampler
 	template <typename F>
 	void downsample (double x, F&& out)
 	{
-		for (int m = (int) dnHist.size () - 1; m > 0; --m) dnHist[m] = dnHist[m - 1];
-		dnHist[0] = x;
+		const int L = (int) dnHist.size ();
+		dnHist[dnPos] = x;
+		const int newest = dnPos;                 // dnHist[newest] = x[n]
+		dnPos = (dnPos + 1) % L;
 		if (upCount == 0)
 		{
 			double acc = 0.0;
-			for (int m = 0; m < (int) dnHist.size (); ++m) acc += h[m] * dnHist[m];
+			for (int m = 0; m < L; ++m)
+			{
+				int idx = newest - m;
+				if (idx < 0) idx += L;
+				acc += h[m] * dnHist[idx];
+			}
 			out (acc);
 		}
 		upCount = (upCount + 1) % factor;
@@ -118,6 +127,7 @@ struct Oversampler
 	{
 		std::fill (upHist.begin (), upHist.end (), 0.0);
 		std::fill (dnHist.begin (), dnHist.end (), 0.0);
+		dnPos = 0;
 		upCount = 0;
 	}
 };

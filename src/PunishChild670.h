@@ -1,5 +1,5 @@
 //=============================================================================
-// fairklaus — PunishChild 660: VST3-Kompressor
+// fairklaus — PunishChild 670: VST3-Kompressor
 // komplettes WDF-Schaltungsmodell des Fairchild 670 nach
 // Raffensperger, "Toward a Wave Digital Filter Model of the Fairchild 670
 // Limiter", Proc. DAFx-12, York, 2012.
@@ -25,11 +25,11 @@ namespace fairklaus { class PanelEditor; }
 namespace fairklaus {
 
 //------------------------------------------------------------------------
-class PunishChild660 : public Steinberg::Vst::SingleComponentEffect
+class PunishChild670 : public Steinberg::Vst::SingleComponentEffect
 {
 public:
-	PunishChild660 ();
-	~PunishChild660 () override;
+	PunishChild670 ();
+	~PunishChild670 () override;
 
 	// IPluginBase
 	Steinberg::tresult PLUGIN_API initialize (Steinberg::FUnknown* context) SMTG_OVERRIDE;
@@ -73,12 +73,15 @@ private:
 
 	std::atomic<float> grForMeter { 0.0f };
 
+	// wiederverwendete Block-Puffer (keine Allokation im Audio-Thread)
+	std::vector<double> bufL, bufR, procL, procR, outL, outR;
+
 #if defined(FAIRKLAUS_WITH_EDITOR)
 	PanelEditor* editor = nullptr;
 #endif
 };
 
 //------------------------------------------------------------------------
-Steinberg::FUnknown* createPunishChild660Instance (void*);
+Steinberg::FUnknown* createPunishChild670Instance (void*);
 
 } // namespace fairklaus

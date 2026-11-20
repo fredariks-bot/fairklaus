@@ -35,13 +35,13 @@ jobs:
         run: cd build && ctest --output-on-failure
 
       - name: VST3 SDK Validator
-        run: ./build/bin/Release/validator "build/VST3/Release/PunishChild 660.vst3"
+        run: ./build/bin/Release/validator "build/VST3/Release/PunishChild 670.vst3"
 
       - name: Plugin-Bundle als Artefakt
         uses: actions/upload-artifact@v4
         with:
-          name: PunishChild-660-vst3-linux-x64
-          path: build/VST3/Release/PunishChild 660.vst3
+          name: PunishChild-670-vst3-linux-x64
+          path: build/VST3/Release/PunishChild 670.vst3
 
   #--- Windows x64 (MSVC) ------------------------------------------------------
   build-windows:
@@ -65,10 +65,10 @@ jobs:
         shell: pwsh
         run: |
           $v = Get-ChildItem -Recurse build -Filter validator.exe | Select-Object -First 1
-          & $v.FullName "build/VST3/Release/PunishChild 660.vst3"
+          & $v.FullName "build/VST3/Release/PunishChild 670.vst3"
 
       - name: Windows-VST3 als Artefakt
         uses: actions/upload-artifact@v4
         with:
-          name: PunishChild-660-vst3-windows-x64
-          path: build/VST3/Release/PunishChild 660.vst3
+          name: PunishChild-670-vst3-windows-x64
+          path: build/VST3/Release/PunishChild 670.vst3

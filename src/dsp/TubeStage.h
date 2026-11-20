@@ -72,8 +72,11 @@ struct TubeStage : wdf::OnePort
 	{
 		const double a = root.reflected ();          // Welle der Schaltung in den Röhrenport
 		const double vgk = vGate - vkDelayed;        // Gl. 4-6 mit Vk(t-1)
-		const double vak = solveTube (a, vgk);       // Newton-Raphson, Gl. 7
-		const double iaTot = NTI * Triode6386::Ia (vgk, vak);
+		const double D = Triode6386::denomConst (vgk);
+		const double vak = solveTube (a, vgk, D);    // Newton-Raphson, Gl. 7
+		double ia, dia;
+		Triode6386::eval (vgk, vak, D, ia, dia);
+		const double iaTot = NTI * ia;
 		iaLast = iaTot;
 		vakLast = vak;
 		root.incident (vak - root.Rp * iaTot);       // Gl. 8: b = Vak - R0*Ia
@@ -89,20 +92,21 @@ struct TubeStage : wdf::OnePort
 	double iaLast = 0.0;    // für Gain-Reduction-Anzeige
 	double vkDelayedPub () const { return vkDelayed; }
 	double vakLast = 0.0;
-	double psuRippleAmp = 0.0;
+	double psuRippleAmp = 0.05;   // 50 mV Netzbrumm auf der 240V-Schiene
 
 private:
 	// Gl. 7: F(Vak) = Vak + R0*NTI*Ia(Vgk,Vak) - a = 0 (monoton in Vak)
-	double solveTube (double a, double vgk)
+	double solveTube (double a, double vgk, double D)
 	{
 		const double R0 = root.Rp;
 		double vak = vakLast > 0.0 ? vakLast : 100.0;   // Warmstart
-		for (int i = 0; i < 16; ++i)
+		for (int i = 0; i < 6; ++i)
 		{
-			const double ia = NTI * Triode6386::Ia (vgk, vak);
-			const double F  = vak + R0 * ia - a;
-			if (std::fabs (F) < 1e-10 * (1.0 + std::fabs (a))) break;
-			double dF = 1.0 + R0 * NTI * Triode6386::dIa_dVak (vgk, vak);
+			double ia, dia;
+			Triode6386::eval (vgk, vak, D, ia, dia);
+			const double F  = vak + R0 * NTI * ia - a;
+			if (std::fabs (F) < 1e-9 * (1.0 + std::fabs (a))) break;
+			double dF = 1.0 + R0 * NTI * dia;
 			if (!(dF > 1e-12)) dF = 1.0;
 			double step = F / dF;
 			if (step > 50.0) step = 50.0;

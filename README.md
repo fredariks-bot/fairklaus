@@ -1,4 +1,4 @@
-# PunishChild 660 — VST3-Kompressor
+# PunishChild 670 — VST3-Kompressor
 
 VST3-Audio-Plugin mit dem **kompletten WDF-Schaltungsmodell (Wave Digital Filter)**
 des Fairchild 670 Limiters nach:
@@ -6,9 +6,9 @@ des Fairchild 670 Limiters nach:
 > John Raffensperger, *"Toward a Wave Digital Filter Model of the Fairchild 670 Limiter"*,
 > Proc. 12th Int. Conference on Digital Audio Effects (DAFx-12), York, UK, 2012.
 
-Das Panel („PunishChild 660") entspricht der Referenzgrafik: VU-Meter (Gain Reduction),
+Das Panel („PunishChild 670") entspricht der Referenzgrafik: VU-Meter (Gain Reduction),
 vier Drehregler (INPUT GAIN, THRESHOLD, TIME CONSTANT, OUTPUT GAIN), Netzschalter mit
-Kontrolllampe und MAINS-Umschalter (50/60 Hz).
+Kontrolllampe.
 Die Oberfläche ist skalierbar (50–400 %, Host-Fenster einfach in der Ecke ziehen).
 
 ## Modell → Code (Paper-Abbildungen)
@@ -36,7 +36,6 @@ Verarbeitungsreihenfolge pro (oversampled) Sample (Fig. 1):
 | Panel | Parameter | Bereich | Bedeutung |
 |---|---|---|---|
 | ON/OFF + Lampe | `Power` | 0/1 | Bypass (gerampt) bei OFF |
-| MAINS | `Mains` | 50/60 Hz | Netzfrequenz → Welligkeit (50 mV) auf der 240-V-Anodenspannung |
 | INPUT GAIN | `Input Gain` | 0…20 dB | Eingangsverstärkung vor dem Eingangsübertrager |
 | THRESHOLD | `Threshold` | −20…+10 dB | Schwelle → Potentiometer-Einstellung φAC = (thr+20)/30 |
 | TIME CONSTANT | `Time Constant` | 1…5 | Stellung des Zeitkonstanten-Netzwerks (Tabelle 3, Pos. 1–5) |
@@ -75,15 +74,15 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release -DFAIRKLAUS_WITH_EDITOR=OFF
 cmake --build build -j
 ```
 
-Ergebnis: `build/VST3/Release/PunishChild 660.vst3`
+Ergebnis: `build/VST3/Release/PunishChild 670.vst3`
 (auf macOS/Windows analog unter dem jeweiligen Build-Ordner; Installation durch Kopieren
 in den VST3-Ordner des Hosts).
 
 **Windows (x64):** lokal mit Visual Studio 2022 + CMake (`cmake -B build -A x64
 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release`), Ergebnis unter
-`build/VST3/Release/PunishChild 660.vst3` (enthält `Contents/x86_64-win/`). Fertige
+`build/VST3/Release/PunishChild 670.vst3` (enthält `Contents/x86_64-win/`). Fertige
 Windows-Builds liefert außerdem die GitHub-Actions-CI als Artefakt
-`PunishChild-660-vst3-windows-x64` (siehe Reiter „Actions" bzw. PR #1).
+`PunishChild-670-vst3-windows-x64` (siehe Reiter „Actions" bzw. PR #1).
 
 ## Tests
 
@@ -101,7 +100,7 @@ cd build && ctest --output-on-failure
 SDK-Validator (im Build-Verzeichnis des SDK, falls mitgebaut):
 
 ```bash
-./build/bin/Release/validator "build/VST3/Release/PunishChild 660.vst3"
+./build/bin/Release/validator "build/VST3/Release/PunishChild 670.vst3"
 ```
 
 ## Verzeichnisstruktur
@@ -110,9 +109,9 @@ SDK-Validator (im Build-Verzeichnis des SDK, falls mitgebaut):
 CMakeLists.txt          Top-Level (Optionen, SDK, Tests)
 src/                    Plugin-Quellcode
   Parameters.h          Parameter-IDs
-  PunishChild660.*      VST3 SingleComponentEffect (Prozessor + Controller + State)
+  PunishChild670.*      VST3 SingleComponentEffect (Prozessor + Controller + State)
   dsp/                  WDF-Schaltungsmodell (siehe Tabelle oben)
-  editor/               VSTGUI-Panel „PunishChild 660" (nur mit GUI-Deps)
+  editor/               VSTGUI-Panel „PunishChild 670" (nur mit GUI-Deps)
 tests/                  test_dsp.cpp (DSP), host_sim.cpp (Plugin-Host-Simulation)
 vst3sdk/                Git-Submodul: Steinberg VST3 SDK v3.8.1_build_84
 ```

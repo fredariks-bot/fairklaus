@@ -1,6 +1,6 @@
 #pragma once
 
-#define stringPluginName "PunishChild 660"
+#define stringPluginName "PunishChild 670"
 #define stringCompanyName "fredariks"
 #define stringCompanyWeb "https://github.com/fredariks-bot/fairklaus"
 #define stringCompanyEmail "fairklaus@localhost"

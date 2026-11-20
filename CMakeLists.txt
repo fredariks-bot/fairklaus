@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25.0)
 
 project(fairklaus
     VERSION 1.0.0
-    DESCRIPTION "PunishChild 660 - VST3 compressor, complete WDF circuit model of the Fairchild 670 (DAFx-12)"
+    DESCRIPTION "PunishChild 670 - VST3 compressor, complete WDF circuit model of the Fairchild 670 (DAFx-12)"
     LANGUAGES CXX
 )
 

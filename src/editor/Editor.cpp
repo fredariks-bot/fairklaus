@@ -1,8 +1,8 @@
 //=============================================================================
-// fairklaus — Editor "PunishChild 660" Implementierung (siehe Editor.h)
+// fairklaus — Editor "PunishChild 670" Implementierung (siehe Editor.h)
 //=============================================================================
 #include "Editor.h"
-#include "../PunishChild660.h"
+#include "../PunishChild670.h"
 #include "vstgui/lib/cvstguitimer.h"
 
 #include <cmath>
@@ -204,7 +204,7 @@ void VuMeterView::draw (CDrawContext* ctx)
 //------------------------------------------------------------------------
 // Panel
 //------------------------------------------------------------------------
-PanelView::PanelView (const CRect& r, PunishChild660* p) : CView (r), proc (p)
+PanelView::PanelView (const CRect& r, PunishChild670* p) : CView (r), proc (p)
 {
 	fontTitle = new CFontDesc ("Arial", 34, kBoldFace);
 	fontLabel = new CFontDesc ("Arial", 13, kBoldFace);
@@ -258,14 +258,11 @@ void PanelView::draw (CDrawContext* ctx)
 		ctx->setFrameColor (CColor (150, 148, 138));
 	}
 
-	// Beschriftungen links: Power / Mains
+	// Beschriftung links: Power
 	ctx->setFont (fontSmall);
 	ctx->setFontColor (kLabelWhite);
 	ctx->drawString ("ON",   CRect (20, 4, 110, 20), kLeftText);
 	ctx->drawString ("OFF",  CRect (20, 78, 110, 94), kLeftText);
-	ctx->drawString ("60Hz", CRect (16, 140, 120, 156), kLeftText);
-	ctx->drawString ("50Hz", CRect (16, 208, 120, 224), kLeftText);
-	ctx->drawString ("MAINS", CRect (16, 228, 120, 244), kLeftText);
 
 	// gelbe Lampe unter dem Power-Schalter
 	const CPoint lampC (65, 112);
@@ -284,7 +281,7 @@ void PanelView::draw (CDrawContext* ctx)
 	// Titel
 	ctx->setFont (fontTitle);
 	ctx->setFontColor (kTitleRed);
-	ctx->drawString ("PunishChild 660", CRect (0, 236, kPanelW, 290), kCenterText);
+	ctx->drawString ("PunishChild 670", CRect (0, 236, kPanelW, 290), kCenterText);
 
 	setDirty (false);
 }
@@ -292,7 +289,7 @@ void PanelView::draw (CDrawContext* ctx)
 //------------------------------------------------------------------------
 // Editor
 //------------------------------------------------------------------------
-PanelEditor::PanelEditor (PunishChild660* p) : VSTGUIEditor (p), processor (p) {}
+PanelEditor::PanelEditor (PunishChild670* p) : VSTGUIEditor (p), processor (p) {}
 
 PanelEditor::~PanelEditor ()
 {
@@ -315,7 +312,6 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	panel->knobTimeConst = new KnobControl (CRect (700 - kRad, kCy - kRad, 700 + kRad, kCy + kRad), this, kParamTimeConstant);
 	panel->knobOutput    = new KnobControl (CRect (850 - kRad, kCy - kRad, 850 + kRad, kCy + kRad), this, kParamOutputGain);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
-	panel->swMains = new SwitchControl (CRect (52, 158, 78, 206), this, kParamMains);
 	panel->meter   = new VuMeterView (CRect (120, 25, 312, 225));
 
 	frame->addView (panel->knobInput);
@@ -323,7 +319,6 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	frame->addView (panel->knobTimeConst);
 	frame->addView (panel->knobOutput);
 	frame->addView (panel->swPower);
-	frame->addView (panel->swMains);
 	frame->addView (panel->meter);
 
 	// Anfangswerte aus den Parametern
@@ -334,7 +329,6 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->knobTimeConst, kParamTimeConstant);
 	sync (panel->knobOutput, kParamOutputGain);
 	sync (panel->swPower, kParamPower);
-	sync (panel->swMains, kParamMains);
 
 	if (!frame->open (parent, platformType))
 	{
@@ -406,8 +400,7 @@ void PanelEditor::pollParameters ()
 		sync (panel->knobTimeConst, kParamTimeConstant);
 		sync (panel->knobOutput, kParamOutputGain);
 		sync (panel->swPower, kParamPower);
-		sync (panel->swMains, kParamMains);
-		panel->setDirty ();
+			panel->setDirty ();
 	}
 }
 
