@@ -19,7 +19,6 @@
 #include "public.sdk/source/vst/vstguieditor.h"
 #include "vstgui/lib/cframe.h"
 #include "vstgui/lib/events.h"
-#include "vstgui/lib/platform/linux/x11platform.h"
 
 #include "Parameters.h"
 
@@ -50,8 +49,6 @@ int main (int argc, char** argv)
 	Display* dpy = XOpenDisplay (nullptr);   // xvfb-run setzt DISPLAY
 	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
 	if (!dpy) return 1;
-	VSTGUI::X11::RunLoop::init ();
-	std::printf ("runloop ok\n");
 	Window win = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy), 0, 0, 1058, 297, 0, 0, 0);
 	XMapWindow (dpy, win);
 	XFlush (dpy);
@@ -136,7 +133,6 @@ int main (int argc, char** argv)
 	comp->release ();
 	XDestroyWindow (dpy, win);
 	XCloseDisplay (dpy);
-	VSTGUI::X11::RunLoop::exit ();
 
 	if (failures) { std::printf ("GUI SMOKE: %d FAILED\n", failures); return 1; }
 	std::printf ("GUI SMOKE: all ok\n");
