@@ -57,8 +57,10 @@ git submodule update --init --recursive   # vst3sdk (Steinberg VST3 SDK, Tag v3.
 **Mit grafischem Editor (Linux)** – GUI-Abhängigkeiten installieren:
 
 ```bash
-sudo apt install build-essential cmake libx11-dev libxcb1-dev libxkbcommon-dev \
-                 libcairo2-dev libfreetype-dev libfontconfig-dev
+sudo apt install build-essential cmake pkg-config libx11-dev libxcb1-dev libxcb-util-dev \
+                 libxcb-cursor-dev libxcb-keysyms1-dev libxcb-xkb-dev libxkbcommon-dev \
+                 libxkbcommon-x11-dev libglib2.0-dev libcairo2-dev libpango1.0-dev \
+                 libfreetype-dev libfontconfig-dev
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j
 ```
