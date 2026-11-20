@@ -6,6 +6,7 @@
 // am THRESHOLD-Knopf den Parameter aendern und der Power-Schalter toggelt.
 //=============================================================================
 #include <cstdio>
+#include <string>
 #include <cmath>
 #include <dlfcn.h>
 
@@ -43,7 +44,8 @@ static void expect (bool ok, const char* what)
 int main (int argc, char** argv)
 {
 	if (argc < 2) { std::printf ("usage: gui_smoke <plugin.vst3>\n"); return 2; }
-	void* h = dlopen (argv[1], RTLD_NOW | RTLD_LOCAL);
+	std::string so = std::string (argv[1]) + "/Contents/x86_64-linux/PunishChild 670.so";
+	void* h = dlopen (so.c_str (), RTLD_NOW | RTLD_LOCAL);
 	if (!h) { std::printf ("dlopen failed: %s\n", dlerror ()); return 2; }
 	auto getFactory = (IPluginFactory* (*)()) dlsym (h, "GetPluginFactory");
 	auto* factory = getFactory ();
