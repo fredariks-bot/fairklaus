@@ -56,7 +56,7 @@ PunishChild670::PunishChild670 ()
 	                                             -24., 0., 0., kStepCountContinuous,
 	                                             ParameterInfo::kCanAutomate));
 	auto* os = new RangeParameter (STR ("Oversampling"), kParamOversampling, nullptr,
-	                               0., 3., 3., 3,
+	                               0., 3., 2., 3,   // Default 4x (CPU); 8x = Index 3
 	                               ParameterInfo::kCanAutomate | ParameterInfo::kIsList);
 	parameters.addParameter (os);
 	auto* sm = new RangeParameter (STR ("Stereo Mode"), kParamStereoMode, nullptr,
@@ -100,7 +100,7 @@ tresult PLUGIN_API PunishChild670::setActive (TBool state)
 tresult PLUGIN_API PunishChild670::setupProcessing (ProcessSetup& setup)
 {
 	sampleRate = setup.sampleRate;
-	model.setSampleRate (sampleRate, 8);
+	model.setSampleRate (sampleRate, osFactor);
 	return SingleComponentEffect::setupProcessing (setup);
 }
 

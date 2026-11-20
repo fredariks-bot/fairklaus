@@ -19,6 +19,7 @@
 #include "public.sdk/source/vst/vstguieditor.h"
 #include "vstgui/lib/cframe.h"
 #include "vstgui/lib/events.h"
+#include "vstgui/lib/platform/linux/x11platform.h"
 
 #include "Parameters.h"
 
@@ -43,7 +44,18 @@ static void expect (bool ok, const char* what)
 
 int main (int argc, char** argv)
 {
+	setvbuf (stdout, nullptr, _IONBF, 0);
 	if (argc < 2) { std::printf ("usage: gui_smoke <plugin.vst3>\n"); return 2; }
+
+	Display* dpy = XOpenDisplay (nullptr);   // xvfb-run setzt DISPLAY
+	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
+	if (!dpy) return 1;
+	VSTGUI::X11::RunLoop::init ();
+	std::printf ("runloop ok\n");
+	Window win = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy), 0, 0, 1058, 297, 0, 0, 0);
+	XMapWindow (dpy, win);
+	XFlush (dpy);
+
 	std::string so = std::string (argv[1]) + "/Contents/x86_64-linux/PunishChild 670.so";
 	void* h = dlopen (so.c_str (), RTLD_NOW | RTLD_LOCAL);
 	if (!h) { std::printf ("dlopen failed: %s\n", dlerror ()); return 2; }
@@ -69,20 +81,16 @@ int main (int argc, char** argv)
 	IPlugView* view = ctrl->createView (ViewType::kEditor);
 	expect (view != nullptr, "createView(Editor) liefert Editor (GUI-Build)");
 	if (!view) return 1;
-
-	Display* dpy = XOpenDisplay (nullptr);
-	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
-	if (!dpy) return 1;
-	Window win = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy), 0, 0, 1058, 297, 0, 0, 0);
-	XMapWindow (dpy, win);
-	XFlush (dpy);
+	std::printf ("view ok\n");
 
 	expect (view->attached ((void*) win, kPlatformTypeX11EmbedWindowID) == kResultOk, "attached");
+	std::printf ("attached ok\n");
 
 	auto* vstEditor = static_cast<VSTGUIEditor*> (view);
 	VSTGUI::CFrame* frame = vstEditor->getFrame ();
 	expect (frame != nullptr, "Editor-Frame vorhanden");
 	if (!frame) return 1;
+	std::printf ("frame ok %gx%g\n", frame->getWidth (), frame->getHeight ());
 
 	// Threshold-Knopf liegt bei (525, 110): Drag nach oben (y kleiner) -> Wert steigt
 	{
@@ -120,6 +128,7 @@ int main (int argc, char** argv)
 	std::printf ("power: vorher=%.1f nach Klick=%.1f\n", powBefore, powAfter);
 	expect (powAfter != powBefore, "Power-Schalter toggelt");
 
+	std::printf ("events done\n");
 	view->removed ();
 	view->release ();
 	comp->setActive (false);
@@ -127,6 +136,7 @@ int main (int argc, char** argv)
 	comp->release ();
 	XDestroyWindow (dpy, win);
 	XCloseDisplay (dpy);
+	VSTGUI::X11::RunLoop::exit ();
 
 	if (failures) { std::printf ("GUI SMOKE: %d FAILED\n", failures); return 1; }
 	std::printf ("GUI SMOKE: all ok\n");

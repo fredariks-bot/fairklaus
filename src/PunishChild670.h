@@ -67,7 +67,7 @@ private:
 
 	// geglättete Werte (Vermeidung von Clicks bei Parameterwechseln)
 	double inputGainLin = 1.0, outputGainLin = 1.0, trimLin = 1.0;
-	int osFactor = 8;
+	int osFactor = 4;   // Default 4x (CPU); ueber Parameter 1/2/4/8x
 	double powerMix = 1.0;      // 1 = an, 0 = Bypass
 	double powerTarget = 1.0;
 
