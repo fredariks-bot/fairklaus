@@ -89,16 +89,16 @@ int main (int argc, char** argv)
 	expect (component->setActive (true) == kResultOk, "setActive");
 	expect (processor->getLatencySamples () >= 0, "getLatencySamples");
 
-	// Parameter: 0=Power,1=Mains,2=InputGain,3=Threshold,4=TimeConstant,5=OutputGain,6=OS,7=StereoMode
-	auto setP = [&] (ParamID id, ParamValue v) { return controller->setParamNormalized (id, v); };
-	setP (0, 1.0);   // Power ON
-	setP (1, 1.0);   // 60 Hz
-	setP (2, 0.0);   // Input 0 dB
-	setP (3, 1.0);   // Threshold +10 dB (max. Limiting)
-	setP (4, 2.0 / 4.0); // Time Constant 3
-	setP (5, 0.0);   // Output 0 dB
-	setP (6, 1.0);   // Oversampling 8x (index 3 -> normalized 1.0)
-	setP (7, 0.0);   // L/R
+	// Parameter siehe Parameters.h (Enum, keine Magic-IDs)
+	auto setP = [&] (Steinberg::Vst::ParamID id, Steinberg::Vst::ParamValue v) { return controller->setParamNormalized (id, v); };
+	using namespace fairklaus;
+	setP (kParamPower, 1.0);          // Power ON
+	setP (kParamInputGain, 0.0);      // Input 0 dB
+	setP (kParamThreshold, 1.0);      // Threshold +10 dB (max. Limiting)
+	setP (kParamTimeConstant, 2.0 / 4.0); // Time Constant 3
+	setP (kParamOutputGain, 0.0);     // Output 0 dB
+	setP (kParamOversampling, 1.0);   // Oversampling 8x (index 3 -> normalized 1.0)
+	setP (kParamStereoMode, 0.0);     // L/R
 
 	const int32 N = 512;
 	std::vector<Sample32> inL (N), inR (N), outL (N), outR (N);
@@ -144,9 +144,9 @@ int main (int argc, char** argv)
 	};
 
 	// 1) Limiting: gleicher Pegel bei thr=-20 (Referenz) und thr=+10 -> GR > 0.5 dB
-	setP (3, 0.0);
+	setP (kParamThreshold, 0.0);
 	double maxRef = runBlock (0.9, 1000.0, 200, 100);
-	setP (3, 1.0);
+	setP (kParamThreshold, 1.0);
 	double maxLoud = runBlock (0.9, 1000.0, 200, 100);
 	std::printf ("in=0.9: thr=-20 -> %.4f, thr=+10 -> %.4f (GR=%.2f dB)\n",
 	             maxRef, maxLoud, 20.0 * std::log10 (std::max (maxRef, 1e-9) / std::max (maxLoud, 1e-9)));
@@ -155,7 +155,7 @@ int main (int argc, char** argv)
 	        "Gain Reduction greift (> 0.5 dB Unterschied)");
 
 	// 2) Power OFF -> Bypass (Ausgang ~ Eingang), nach Einschwingen messen
-	setP (0, 0.0);
+	setP (kParamPower, 0.0);
 	double maxBypass = runBlock (0.5, 1000.0, 120, 60);
 	std::printf ("maxOut bei Power OFF, in=0.5: %.4f (Bypass)\n", maxBypass);
 	expect (std::fabs (maxBypass - 0.5) < 0.05, "Power OFF = Bypass (~0.5)");
@@ -184,7 +184,7 @@ int main (int argc, char** argv)
 	tresult rGet = component->getState (&ms);
 	std::printf ("getState -> %d (buf=%zu bytes)\n", (int) rGet, ms.buf.size ());
 	expect (rGet == kResultOk, "getState");
-	setP (3, 0.0);   // Threshold verstellen
+	setP (kParamThreshold, 0.0);   // Threshold verstellen
 	ms.pos = 0;
 	tresult rSet = component->setState (&ms);
 	std::printf ("setState -> %d\n", (int) rSet);
