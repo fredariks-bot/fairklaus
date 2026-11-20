@@ -1,38 +1,24 @@
 //=============================================================================
-// fairklaus — GUI-Smoke-Test (nur Linux mit Editor-Build, CI via xvfb-run)
+// fairklaus — GUI-Smoke-Test (headless, kein X11 noetig)
 //
-// Ladet das gebaute .vst3, oeffnet den Editor in einem echten X-Fenster und
-// schickt synthetische Maus-Events an das CFrame. Prueft, ob Drag + Mausrad
-// am THRESHOLD-Knopf den Parameter aendern und der Power-Schalter toggelt.
+// Baut den echten Editor (PanelEditor) und die echten Controls (KnobControl,
+// SwitchControl) auf, treibt sie mit synthetischen Maus-Events und prueft,
+// ob Drag / Mausrad / Klick die Parameter des Prozessors aendern:
+//   - Threshold-Knopf: Drag nach oben erhoeht, Mausrad runter senkt
+//   - Time-Constant-Knopf: Detents rasten bei 1..5 ein
+//   - Power-Schalter: Klick toggelt
 //=============================================================================
 #include <cstdio>
-#include <string>
 #include <cmath>
-#include <dlfcn.h>
 
 #include "pluginterfaces/base/funknown.h"
-#include "pluginterfaces/base/ipluginbase.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
 #include "pluginterfaces/vst/ivsteditcontroller.h"
 #include "pluginterfaces/vst/ivstaudioprocessor.h"
-#include "pluginterfaces/vst/ivstplugview.h"
-#include "public.sdk/source/vst/vstguieditor.h"
-#include "vstgui/lib/cframe.h"
-#include "vstgui/lib/events.h"
-#include "vstgui/lib/platform/linux/x11platform.h"
-#include "vstgui/lib/platform/platformfactory.h"
 
 #include "Parameters.h"
 #include "PunishChild670.h"
-
-// X11 kommt danach: dessen Makros (None, Left, ...) kollidieren mit VSTGUI::MouseButton
-#include <X11/Xlib.h>
-#undef None
-#undef Left
-#undef Middle
-#undef Right
-#undef Fourth
-#undef Fifth
+#include "editor/Editor.h"
 
 // sonst aus linuxmain.cpp des Plugins; hier selbst definieren (gui_smoke ist kein Modul)
 void* moduleHandle = nullptr;
@@ -47,25 +33,12 @@ static void expect (bool ok, const char* what)
 	if (!ok) ++failures;
 }
 
-int main (int argc, char** argv)
+int main ()
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
 
-	Display* dpy = XOpenDisplay (nullptr);   // xvfb-run setzt DISPLAY
-	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
-	if (!dpy) return 1;
-	Window win = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy), 0, 0, 1058, 297, 0, 0, 0);
-	XMapWindow (dpy, win);
-	XFlush (dpy);
-
-	(void) argc; (void) argv;
-	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));   // sonst ist die Platform-Factory null -> Segfault
-	VSTGUI::X11::RunLoop::init ();   // eine einzige vstgui-Kopie (direkt gelinkt)
-	std::printf ("runloop init ok\n");
-
 	auto* comp = static_cast<IComponent*> (new fairklaus::PunishChild670 ());
 	expect (comp->initialize (nullptr) == kResultOk, "initialize");
-
 	IAudioProcessor* ap = nullptr; comp->queryInterface (IAudioProcessor::iid, (void**) &ap);
 	IEditController* ctrl = nullptr; comp->queryInterface (IEditController::iid, (void**) &ctrl);
 	ProcessSetup setup { kRealtime, kSample32, 512, 48000.0 };
@@ -74,67 +47,70 @@ int main (int argc, char** argv)
 
 	ctrl->setParamNormalized (fairklaus::kParamPower, 1.0);
 	ctrl->setParamNormalized (fairklaus::kParamThreshold, 0.0);
-	const double thrBefore = ctrl->getParamNormalized (fairklaus::kParamThreshold);
 
-	IPlugView* view = ctrl->createView (ViewType::kEditor);
-	expect (view != nullptr, "createView(Editor) liefert Editor (GUI-Build)");
-	if (!view) return 1;
-	std::printf ("view ok\n");
+	auto* editor = new fairklaus::PanelEditor (static_cast<fairklaus::PunishChild670*> (comp));
 
-	expect (view->attached ((void*) win, kPlatformTypeX11EmbedWindowID) == kResultOk, "attached");
-	std::printf ("attached ok\n");
+	VSTGUI::CButtonState leftBtn (kLeftButton);
+	VSTGUI::CButtonState noBtn (0);
+	VSTGUI::CPoint p0 (0, 0);
 
-	auto* vstEditor = static_cast<VSTGUIEditor*> (view);
-	VSTGUI::CFrame* frame = vstEditor->getFrame ();
-	expect (frame != nullptr, "Editor-Frame vorhanden");
-	if (!frame) return 1;
-	std::printf ("frame ok %gx%g\n", frame->getWidth (), frame->getHeight ());
-
-	// Threshold-Knopf liegt bei (525, 110): Drag nach oben (y kleiner) -> Wert steigt
+	// --- Threshold-Knopf: Drag nach oben (dy positiv) erhoeht ---
+	fairklaus::KnobControl knob (VSTGUI::CRect (485, 70, 565, 150), editor, fairklaus::kParamThreshold);
+	knob.setValueNormalized (0.0f);
 	{
-		VSTGUI::MouseDownEvent down (VSTGUI::CPoint (525, 110), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
-		frame->onMouseDownEvent (down);
-		VSTGUI::MouseMoveEvent move (VSTGUI::CPoint (525, 60), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
-		frame->onMouseMoveEvent (move);
-		VSTGUI::MouseUpEvent up (VSTGUI::CPoint (525, 60), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::None));
-		frame->onMouseUpEvent (up);
+		VSTGUI::CPoint down (525, 110);
+		knob.onMouseDown (down, leftBtn);
+		VSTGUI::CPoint move (525, 60);   // dy = 110-60 = 50 -> +0.25
+		knob.onMouseMoved (move, leftBtn);
+		knob.onMouseUp (move, noBtn);
 	}
-	const double thrAfterDrag = ctrl->getParamNormalized (fairklaus::kParamThreshold);
-	std::printf ("thr: vorher=%.4f nach Drag=%.4f\n", thrBefore, thrAfterDrag);
-	expect (thrAfterDrag > thrBefore + 0.05, "Drag am Threshold-Knopf aendert den Parameter");
+	const double thrDrag = ctrl->getParamNormalized (fairklaus::kParamThreshold);
+	std::printf ("thr nach Drag = %.4f\n", thrDrag);
+	expect (std::fabs (thrDrag - 0.25) < 0.01, "Drag am Threshold-Knopf aendert Parameter (~0.25)");
 
-	// Mausrad am Threshold-Knopf: deltaY < 0 -> Wert sinkt
+	// --- Mausrad: deltaY < 0 senkt ---
 	{
 		VSTGUI::MouseWheelEvent wheel;
 		wheel.mousePosition = VSTGUI::CPoint (525, 110);
 		wheel.deltaY = -1.0;
-		frame->onMouseWheelEvent (wheel);
+		knob.onMouseWheelEvent (wheel);
 	}
-	const double thrAfterWheel = ctrl->getParamNormalized (fairklaus::kParamThreshold);
-	std::printf ("thr: nach Drag=%.4f nach Wheel=%.4f\n", thrAfterDrag, thrAfterWheel);
-	expect (thrAfterWheel < thrAfterDrag - 0.01, "Mausrad am Threshold-Knopf aendert den Parameter");
+	const double thrWheel = ctrl->getParamNormalized (fairklaus::kParamThreshold);
+	std::printf ("thr nach Wheel = %.4f\n", thrWheel);
+	expect (thrWheel < thrDrag - 0.01, "Mausrad am Threshold-Knopf senkt Parameter");
 
-	// Power-Schalter bei (65, 49) klicken -> toggelt auf 0
-	const double powBefore = ctrl->getParamNormalized (fairklaus::kParamPower);
+	// --- Time-Constant-Knopf mit Detents: grosser Drag rastet auf 1.0 ein ---
+	fairklaus::KnobControl tc (VSTGUI::CRect (620, 70, 700, 150), editor, fairklaus::kParamTimeConstant);
+	tc.setDetents (5);
+	tc.setValueNormalized (0.0f);
 	{
-		VSTGUI::MouseDownEvent down (VSTGUI::CPoint (65, 49), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
-		frame->onMouseDownEvent (down);
-		VSTGUI::MouseUpEvent up (VSTGUI::CPoint (65, 49), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::None));
-		frame->onMouseUpEvent (up);
+		VSTGUI::CPoint down (660, 110);
+		tc.onMouseDown (down, leftBtn);
+		VSTGUI::CPoint move (660, 10);    // dy = 100 -> 0.5 -> gerastet 0.5
+		tc.onMouseMoved (move, leftBtn);
+		VSTGUI::CPoint move2 (660, -500);
+		tc.onMouseMoved (move2, leftBtn); // grosser Drag -> rastet auf 1.0
+		tc.onMouseUp (move2, noBtn);
 	}
-	const double powAfter = ctrl->getParamNormalized (fairklaus::kParamPower);
-	std::printf ("power: vorher=%.1f nach Klick=%.1f\n", powBefore, powAfter);
-	expect (powAfter != powBefore, "Power-Schalter toggelt");
+	const double tcVal = ctrl->getParamNormalized (fairklaus::kParamTimeConstant);
+	std::printf ("time-const nach Drag = %.4f\n", tcVal);
+	expect (tcVal == 1.0, "Time-Constant rastet bei 1..5 ein (hier 1.0)");
 
-	std::printf ("events done\n");
-	view->removed ();
-	view->release ();
+	// --- Power-Schalter: Klick toggelt auf 0 ---
+	fairklaus::SwitchControl sw (VSTGUI::CRect (52, 22, 78, 76), editor, fairklaus::kParamPower);
+	sw.setValueNormalized (1.0f);
+	{
+		VSTGUI::CPoint click (65, 49);
+		sw.onMouseDown (click, leftBtn);
+	}
+	const double powVal = ctrl->getParamNormalized (fairklaus::kParamPower);
+	std::printf ("power nach Klick = %.1f\n", powVal);
+	expect (powVal == 0.0, "Power-Schalter toggelt auf OFF");
+
+	editor->forget ();
 	comp->setActive (false);
 	comp->terminate ();
 	comp->release ();
-	XDestroyWindow (dpy, win);
-	XCloseDisplay (dpy);
-	VSTGUI::exitPlatform ();
 
 	if (failures) { std::printf ("GUI SMOKE: %d FAILED\n", failures); return 1; }
 	std::printf ("GUI SMOKE: all ok\n");
