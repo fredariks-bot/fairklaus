@@ -19,6 +19,11 @@ set(SMTG_ENABLE_VST3_HOSTING_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(SMTG_CREATE_PLUGIN_LINK OFF CACHE BOOL "" FORCE)
 set(SMTG_RUN_VST_VALIDATOR OFF CACHE BOOL "" FORCE)
 
+# Wir brauchen nur die vstgui/vstgui_uidescription-Libs, nicht die Standalone-App (gtkmm-3.0)
+set(VSTGUI_STANDALONE OFF CACHE BOOL "" FORCE)
+set(VSTGUI_TOOLS OFF CACHE BOOL "" FORCE)
+set(VSTGUI_DISABLE_UNITTESTS ON CACHE BOOL "" FORCE)
+
 set(SDK_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/vst3sdk)
 
 # Editor nur wenn GUI-Deps vorhanden (Linux: dieselben pkg-config-Module wie vstgui4)
