@@ -119,7 +119,6 @@ tresult PLUGIN_API PunishChild660::setParamNormalized (Steinberg::Vst::ParamID i
 	if (res == kResultOk)
 	{
 		applyParameter (id, value);
-		pushParamToEditor (id, value);
 	}
 	return res;
 }
@@ -159,16 +158,6 @@ void PunishChild660::applyParameters ()
 	for (uint32 i = 0; i < parameters.getParameterCount (); ++i)
 		applyParameter ((Steinberg::Vst::ParamID) parameters.getParameterByIndex (i)->getInfo ().id,
 		                parameters.getParameterByIndex (i)->getNormalized ());
-}
-
-//------------------------------------------------------------------------
-void PunishChild660::pushParamToEditor (Steinberg::Vst::ParamID id, double normalized)
-{
-#if defined(FAIRKLAUS_WITH_EDITOR)
-	if (editor) editor->onParameterChanged (id, normalized);
-#else
-	(void) id; (void) normalized;
-#endif
 }
 
 //------------------------------------------------------------------------

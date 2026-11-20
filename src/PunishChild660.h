@@ -60,7 +60,6 @@ public:
 private:
 	void applyParameters ();                    // Parameter -> Modell
 	void applyParameter (Steinberg::Vst::ParamID id, double normalized);
-	void pushParamToEditor (Steinberg::Vst::ParamID id, double normalized);
 
 	Fairchild670 model;
 	double sampleRate = 44100.0;
