@@ -120,6 +120,58 @@ void KnobControl::onMouseWheelEvent (MouseWheelEvent& event)
 }
 
 //------------------------------------------------------------------------
+// OS-Umschalter (1x/2x/4x/8x): Klick zyklisch weiterschalten
+//------------------------------------------------------------------------
+class OsSelector : public VSTGUI::CControl
+{
+public:
+	OsSelector (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, Steinberg::int32 tag);
+	void draw (VSTGUI::CDrawContext* ctx) override;
+	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
+	CLASS_METHODS_NOCOPY (OsSelector, VSTGUI::CControl)
+};
+
+//------------------------------------------------------------------------
+// OS-Umschalter
+//------------------------------------------------------------------------
+OsSelector::OsSelector (const CRect& r, IControlListener* listener, int32 tag)
+    : CControl (r, listener, tag)
+{
+	setDefaultValue (0.5);   // Default 4x
+}
+
+void OsSelector::draw (CDrawContext* ctx)
+{
+	static const char* labels[4] = { "1x", "2x", "4x", "8x" };
+	const CRect r = getViewSize ();
+	ctx->setFillColor (kSlotDark);
+	ctx->setFrameColor (kKnobRim);
+	ctx->setLineWidth (1.0);
+	ctx->drawRect (r, kDrawFilledAndStroked);
+	const int idx = (int) (getValueNormalized () * 3.0 + 0.5);
+	static CFontDesc fontOs ("Arial", 15, kBoldFace);
+	ctx->setFont (&fontOs);
+	ctx->setFontColor (kYellow);
+	ctx->drawString (labels[idx < 0 ? 0 : (idx > 3 ? 3 : idx)], r, kCenterText);
+	setDirty (false);
+}
+
+CMouseEventResult OsSelector::onMouseDown (CPoint&, const CButtonState& buttons)
+{
+	if (buttons.isLeftButton ())
+	{
+		beginEdit ();
+		double v = getValueNormalized () + 0.25;
+		if (v > 1.0) v = 0.0;
+		setValueNormalized ((float) v);
+		valueChanged ();
+		setDirty (true);
+		endEdit ();
+	}
+	return kMouseEventHandled;
+}
+
+//------------------------------------------------------------------------
 // Schalter
 //------------------------------------------------------------------------
 SwitchControl::SwitchControl (const CRect& r, IControlListener* listener, int32 tag)
@@ -276,6 +328,7 @@ void PanelView::draw (CDrawContext* ctx)
 	ctx->setFont (fontSmall);
 	ctx->setFontColor (kLabelWhite);
 	ctx->drawString ("ON",   CRect (20, 4, 110, 20), kLeftText);
+	ctx->drawString ("OS", CRect (30, 228, 110, 244), kLeftText);
 	ctx->drawString ("OFF",  CRect (20, 78, 110, 94), kLeftText);
 
 	// gelbe Lampe unter dem Power-Schalter
@@ -322,12 +375,13 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	frame->addView (panel);
 
 	const double kCy = 110, kRad = 40;
-	panel->knobInput     = new KnobControl (CRect (390 - kRad, kCy - kRad, 400 + kRad, kCy + kRad), this, kParamInputGain);
-	panel->knobThreshold = new KnobControl (CRect (525 - kRad, kCy - kRad, 550 + kRad, kCy + kRad), this, kParamThreshold);
+	panel->knobInput     = new KnobControl (CRect (390 - kRad, kCy - kRad, 390 + kRad, kCy + kRad), this, kParamInputGain);
+	panel->knobThreshold = new KnobControl (CRect (525 - kRad, kCy - kRad, 525 + kRad, kCy + kRad), this, kParamThreshold);
 	panel->knobTimeConst = new KnobControl (CRect (660 - kRad, kCy - kRad, 660 + kRad, kCy + kRad), this, kParamTimeConstant);
 	panel->knobTimeConst->setDetents (5);   // rastet bei 1..5 ein
-	panel->knobOutput    = new KnobControl (CRect (795 - kRad, kCy - kRad, 850 + kRad, kCy + kRad), this, kParamOutputGain);
+	panel->knobOutput    = new KnobControl (CRect (795 - kRad, kCy - kRad, 795 + kRad, kCy + kRad), this, kParamOutputGain);
 	panel->knobTrim      = new KnobControl (CRect (945 - kRad, kCy - kRad, 945 + kRad, kCy + kRad), this, kParamTrim);
+	panel->osSel = new OsSelector (CRect (52, 158, 78, 206), this, kParamOversampling);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
 	panel->meter   = new VuMeterView (CRect (120, 25, 312, 225));
 
@@ -336,6 +390,7 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	frame->addView (panel->knobTimeConst);
 	frame->addView (panel->knobOutput);
 	frame->addView (panel->knobTrim);
+	frame->addView (panel->osSel);
 	frame->addView (panel->swPower);
 	frame->addView (panel->meter);
 
@@ -348,6 +403,7 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->knobOutput, kParamOutputGain);
 	sync (panel->knobTrim, kParamTrim);
 	sync (panel->swPower, kParamPower);
+	sync (panel->osSel, kParamOversampling);
 
 	if (!frame->open (parent, platformType))
 	{
@@ -420,6 +476,7 @@ void PanelEditor::pollParameters ()
 		sync (panel->knobOutput, kParamOutputGain);
 	sync (panel->knobTrim, kParamTrim);
 		sync (panel->swPower, kParamPower);
+	sync (panel->osSel, kParamOversampling);
 			panel->setDirty ();
 	}
 }

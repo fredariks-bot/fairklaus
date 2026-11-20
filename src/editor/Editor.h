@@ -91,6 +91,7 @@ public:
 	KnobControl* knobOutput = nullptr;
 	KnobControl* knobTrim = nullptr;
 	SwitchControl* swPower = nullptr;
+	VSTGUI::CControl* osSel = nullptr;
 	VuMeterView* meter = nullptr;
 	bool lampOn = true;              // gelbe Lampe (Power an)
 

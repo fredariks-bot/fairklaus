@@ -41,7 +41,7 @@ Verarbeitungsreihenfolge pro (oversampled) Sample (Fig. 1):
 | TIME CONSTANT | `Time Constant` | 1…5 | Stellung des Zeitkonstanten-Netzwerks (Tabelle 3, Pos. 1–5) |
 | OUTPUT GAIN | `Output Gain` | 0…20 dB | Ausgangstrim/Make-up-Gain |
 | TRIM | `Trim` | −24…0 dB | Ausgangs-Lautstärke (nur leiser) |
-| (nicht auf Panel) | `Oversampling` | 1×/2×/4×/8× | Default 4× (CPU); 8× wie im Paper möglich |
+| OS (links unten) | `Oversampling` | 1×/2×/4×/8× (Klick zyklisch) | Default 4× (CPU); 8× wie im Paper möglich |
 | (nicht auf Panel) | `Stereo Mode` | L/R, M/S | gekoppelter Stereo-Betrieb oder Mitten/Seite |
 
 VU-Meter zeigt Gain Reduction in dB: `GR = (20/3)·log10(Ia_Ruhe / Ia_aktuell)`

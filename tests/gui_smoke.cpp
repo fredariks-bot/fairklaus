@@ -10,6 +10,7 @@
 //=============================================================================
 #include <cstdio>
 #include <cmath>
+#include <vector>
 #include <dlfcn.h>
 
 #include "Parameters.h"
@@ -103,6 +104,52 @@ int main ()
 	const double tcVal = ctrl->getParamNormalized (fairklaus::kParamTimeConstant);
 	std::printf ("time-const nach Drag = %.4f\n", tcVal);
 	expect (tcVal == 1.0, "Time-Constant rastet bei 1..5 ein (hier 1.0)");
+
+	// --- End-to-End: Threshold per Knopf aendern -> process() -> Ausgabe aendert sich ---
+	{
+		ctrl->setParamNormalized (fairklaus::kParamThreshold, 0.0);
+		auto runAmp = [&] () {
+			const int32 N = 256;
+			std::vector<Sample32> inL (N), inR (N), outL (N), outR (N);
+			Sample32* inCh[2] = { inL.data (), inR.data () };
+			Sample32* outCh[2] = { outL.data (), outR.data () };
+			AudioBusBuffers inB, outB;
+			inB.numChannels = 2; inB.silenceFlags = 0; inB.channelBuffers32 = inCh;
+			outB.numChannels = 2; outB.silenceFlags = 0; outB.channelBuffers32 = outCh;
+			AudioBusBuffers inA[1] = { inB }, outA[1] = { outB };
+			double m = 0;
+			for (int b = 0; b < 120; ++b)
+			{
+				for (int i = 0; i < N; ++i)
+				{
+					double x = 0.9 * std::sin (2 * M_PI * 1000 * (b * N + i) / 48000.0);
+					inL[i] = (Sample32) x; inR[i] = (Sample32) x;
+				}
+				ProcessData d {};
+				d.processMode = kRealtime; d.symbolicSampleSize = kSample32; d.numSamples = N;
+				d.numInputs = 1; d.numOutputs = 1; d.inputs = inA; d.outputs = outA;
+				ap->process (d);
+				if (b >= 60) for (int i = 0; i < N; ++i) m = std::max (m, (double) std::fabs (outL[i]));
+			}
+			return m;
+		};
+		const double ampLow = runAmp ();
+		ctrl->setParamNormalized (fairklaus::kParamThreshold, 1.0);   // max Limiting
+		const double ampHigh = runAmp ();
+		std::printf ("amp thr=low %.4f  thr=high %.4f\n", ampLow, ampHigh);
+		expect (ampHigh < ampLow * 0.9, "Threshold per Knopf/Param aendert Gain Reduction in process()");
+	}
+
+	// --- OS-Umschalter: Klick zyklisch 4x -> 8x (norm 0.5 -> 1.0) ---
+	fairklaus::OsSelector os (VSTGUI::CRect (52, 158, 78, 206), editor, fairklaus::kParamOversampling);
+	os.setValueNormalized (0.5f);   // 4x
+	{
+		VSTGUI::CPoint click (65, 180);
+		os.onMouseDown (click, leftBtn);
+	}
+	const double osVal = ctrl->getParamNormalized (fairklaus::kParamOversampling);
+	std::printf ("os nach Klick = %.2f (1.0 = 8x)\n", osVal);
+	expect (osVal > 0.99, "OS-Umschalter klickt auf 8x (norm 1.0)");
 
 	// --- Power-Schalter: Klick toggelt auf 0 ---
 	fairklaus::SwitchControl sw (VSTGUI::CRect (52, 22, 78, 76), editor, fairklaus::kParamPower);
