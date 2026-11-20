@@ -15,6 +15,8 @@
 #include "Parameters.h"
 #include "PunishChild670.h"     // zuerst: sonst kollidiert das setState-Makro in vstsinglecomponenteffect.h
 #include "editor/Editor.h"
+#include "vstgui/lib/events.h"
+#include "vstgui/lib/platform/platformfactory.h"
 
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
