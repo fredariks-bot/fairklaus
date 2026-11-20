@@ -10,6 +10,7 @@
 //=============================================================================
 #include <cstdio>
 #include <cmath>
+#include <dlfcn.h>
 
 #include "Parameters.h"
 #include "PunishChild670.h"     // zuerst: sonst kollidiert das setState-Makro in vstsinglecomponenteffect.h
@@ -36,6 +37,8 @@ static void expect (bool ok, const char* what)
 int main ()
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
+	// Platform-Factory initialisieren (Event::Event() braucht getTicks()); kein X11/RunLoop noetig
+	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));
 
 	auto* comp = static_cast<IComponent*> (new fairklaus::PunishChild670 ());
 	expect (comp->initialize (nullptr) == kResultOk, "initialize");
@@ -110,6 +113,7 @@ int main ()
 	std::printf ("power nach Klick = %.1f\n", powVal);
 	expect (powVal == 0.0, "Power-Schalter toggelt auf OFF");
 
+	VSTGUI::exitPlatform ();
 	editor->forget ();
 	comp->setActive (false);
 	comp->terminate ();
