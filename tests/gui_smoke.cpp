@@ -9,8 +9,6 @@
 #include <cmath>
 #include <dlfcn.h>
 
-#include <X11/Xlib.h>
-
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/base/ipluginbase.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
@@ -22,6 +20,15 @@
 #include "vstgui/lib/events.h"
 
 #include "Parameters.h"
+
+// X11 kommt danach: dessen Makros (None, Left, ...) kollidieren mit VSTGUI::MouseButton
+#include <X11/Xlib.h>
+#undef None
+#undef Left
+#undef Middle
+#undef Right
+#undef Fourth
+#undef Fifth
 
 using namespace Steinberg;
 using namespace Steinberg::Vst;
