@@ -33,6 +33,9 @@
 #undef Fourth
 #undef Fifth
 
+// sonst aus linuxmain.cpp des Plugins; hier selbst definieren (gui_smoke ist kein Modul)
+void* moduleHandle = nullptr;
+
 using namespace Steinberg;
 using namespace Steinberg::Vst;
 
