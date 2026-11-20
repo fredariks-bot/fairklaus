@@ -11,14 +11,14 @@
 #include <cstdio>
 #include <cmath>
 
+#include "Parameters.h"
+#include "PunishChild670.h"     // zuerst: sonst kollidiert das setState-Makro in vstsinglecomponenteffect.h
+#include "editor/Editor.h"
+
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
 #include "pluginterfaces/vst/ivsteditcontroller.h"
 #include "pluginterfaces/vst/ivstaudioprocessor.h"
-
-#include "Parameters.h"
-#include "PunishChild670.h"
-#include "editor/Editor.h"
 
 // sonst aus linuxmain.cpp des Plugins; hier selbst definieren (gui_smoke ist kein Modul)
 void* moduleHandle = nullptr;
@@ -50,7 +50,7 @@ int main ()
 
 	auto* editor = new fairklaus::PanelEditor (static_cast<fairklaus::PunishChild670*> (comp));
 
-	VSTGUI::CButtonState leftBtn (VSTGUI::kLeftButton);
+	VSTGUI::CButtonState leftBtn (VSTGUI::kLButton);
 	VSTGUI::CButtonState noBtn (0);
 	VSTGUI::CPoint p0 (0, 0);
 
