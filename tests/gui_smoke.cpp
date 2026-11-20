@@ -142,7 +142,7 @@ int main ()
 
 	// --- OS-Umschalter: Klick zyklisch 4x -> 8x (norm 0.5 -> 1.0) ---
 	fairklaus::OsSelector os (VSTGUI::CRect (52, 158, 78, 206), editor, fairklaus::kParamOversampling);
-	os.setValueNormalized (0.5f);   // 4x
+	os.setValueNormalized (2.0f / 3.0f);   // 4x
 	{
 		VSTGUI::CPoint click (65, 180);
 		os.onMouseDown (click, leftBtn);

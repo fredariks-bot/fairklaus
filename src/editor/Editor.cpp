@@ -125,7 +125,7 @@ void KnobControl::onMouseWheelEvent (MouseWheelEvent& event)
 OsSelector::OsSelector (const CRect& r, IControlListener* listener, int32 tag)
     : CControl (r, listener, tag)
 {
-	setDefaultValue (0.5);   // Default 4x
+	setDefaultValue (2.0 / 3.0);   // Default 4x (Stufe 2 von 4: norm 2/3)
 }
 
 void OsSelector::draw (CDrawContext* ctx)
@@ -149,8 +149,8 @@ CMouseEventResult OsSelector::onMouseDown (CPoint&, const CButtonState& buttons)
 	if (buttons.isLeftButton ())
 	{
 		beginEdit ();
-		double v = getValueNormalized () + 0.25;
-		if (v > 1.0) v = 0.0;
+		double v = getValueNormalized () + 1.0 / 3.0;   // 4 Stufen: 1x,2x,4x,8x
+		if (v > 1.0 + 1e-6) v = 0.0;
 		setValueNormalized ((float) v);
 		valueChanged ();
 		setDirty (true);
