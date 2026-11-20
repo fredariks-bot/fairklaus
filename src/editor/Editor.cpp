@@ -92,7 +92,7 @@ CMouseEventResult KnobControl::onMouseMoved (CPoint& where, const CButtonState& 
 	{
 		const double dy = lastY - where.y;
 		lastY = where.y;
-		setValueNormalized (getValueNormalized () + dy * 0.005);
+		setValueNormalized ((float) snap (getValueNormalized () + dy * 0.005));
 		valueChanged ();
 		setDirty (true);
 		return kMouseEventHandled;
@@ -111,7 +111,7 @@ void KnobControl::onMouseWheelEvent (MouseWheelEvent& event)
 	if (event.deltaY != 0.0)
 	{
 		beginEdit ();
-		setValueNormalized (getValueNormalized () + (float) event.deltaY * 0.05f);
+		setValueNormalized ((float) snap (getValueNormalized () + (float) event.deltaY * 0.05f));
 		valueChanged ();
 		setDirty (true);
 		endEdit ();
@@ -324,7 +324,8 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	const double kCy = 110, kRad = 40;
 	panel->knobInput     = new KnobControl (CRect (390 - kRad, kCy - kRad, 400 + kRad, kCy + kRad), this, kParamInputGain);
 	panel->knobThreshold = new KnobControl (CRect (525 - kRad, kCy - kRad, 550 + kRad, kCy + kRad), this, kParamThreshold);
-	panel->knobTimeConst = new KnobControl (CRect (660 - kRad, kCy - kRad, 700 + kRad, kCy + kRad), this, kParamTimeConstant);
+	panel->knobTimeConst = new KnobControl (CRect (660 - kRad, kCy - kRad, 660 + kRad, kCy + kRad), this, kParamTimeConstant);
+	panel->knobTimeConst->setDetents (5);   // rastet bei 1..5 ein
 	panel->knobOutput    = new KnobControl (CRect (795 - kRad, kCy - kRad, 850 + kRad, kCy + kRad), this, kParamOutputGain);
 	panel->knobTrim      = new KnobControl (CRect (945 - kRad, kCy - kRad, 945 + kRad, kCy + kRad), this, kParamTrim);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
