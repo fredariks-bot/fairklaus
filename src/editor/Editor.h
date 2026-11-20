@@ -52,6 +52,18 @@ private:
 };
 
 //------------------------------------------------------------------------
+// OS-Umschalter (1x/2x/4x/8x): Klick zyklisch weiterschalten
+//------------------------------------------------------------------------
+class OsSelector : public VSTGUI::CControl
+{
+public:
+	OsSelector (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, Steinberg::int32 tag);
+	void draw (VSTGUI::CDrawContext* ctx) override;
+	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
+	CLASS_METHODS_NOCOPY (OsSelector, VSTGUI::CControl)
+};
+
+//------------------------------------------------------------------------
 // Zweistufen-Schalter (Power ON/OFF)
 //------------------------------------------------------------------------
 class SwitchControl : public VSTGUI::CControl
