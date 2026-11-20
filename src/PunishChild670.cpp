@@ -52,6 +52,9 @@ PunishChild670::PunishChild670 ()
 	parameters.addParameter (new RangeParameter (STR ("Output Gain"), kParamOutputGain, STR ("dB"),
 	                                             0., 20., 0., kStepCountContinuous,
 	                                             ParameterInfo::kCanAutomate));
+	parameters.addParameter (new RangeParameter (STR ("Trim"), kParamTrim, STR ("dB"),
+	                                             -24., 0., 0., kStepCountContinuous,
+	                                             ParameterInfo::kCanAutomate));
 	auto* os = new RangeParameter (STR ("Oversampling"), kParamOversampling, nullptr,
 	                               0., 3., 3., 3,
 	                               ParameterInfo::kCanAutomate | ParameterInfo::kIsList);
@@ -131,6 +134,7 @@ void PunishChild670::applyParameter (Steinberg::Vst::ParamID id, double normaliz
 		case kParamThreshold: model.setThreshold (plain); break;
 		case kParamTimeConstant: model.setTimeConstantPos ((int) plain + 0.5); break;
 		case kParamOutputGain: outputGainLin = std::pow (10.0, plain / 20.0); break;
+		case kParamTrim: trimLin = std::pow (10.0, plain / 20.0); break;
 		case kParamOversampling:
 		{
 			static const int factors[4] = { 1, 2, 4, 8 };
@@ -236,7 +240,7 @@ tresult PLUGIN_API PunishChild670::process (ProcessData& data)
 	model.processBlock (procL.data (), procR.data (), outL.data (), outR.data (), numSamples);
 
 	// Ausgangsverstärkung + Power-Bypass-Mischung (geglättet, ~5 ms)
-	const double gOut = outputGainLin;
+	const double gOut = outputGainLin * trimLin;
 	const double ramp = 1.0 / std::max (1.0, 0.005 * sampleRate);
 	for (int i = 0; i < numSamples; ++i)
 	{

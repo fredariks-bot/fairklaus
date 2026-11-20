@@ -7,7 +7,7 @@ des Fairchild 670 Limiters nach:
 > Proc. 12th Int. Conference on Digital Audio Effects (DAFx-12), York, UK, 2012.
 
 Das Panel („PunishChild 670") entspricht der Referenzgrafik: VU-Meter (Gain Reduction),
-vier Drehregler (INPUT GAIN, THRESHOLD, TIME CONSTANT, OUTPUT GAIN), Netzschalter mit
+fünf Drehregler (INPUT GAIN, THRESHOLD, TIME CONSTANT, OUTPUT GAIN, TRIM — Mausrad funktioniert auch), Netzschalter mit
 Kontrolllampe.
 Die Oberfläche ist skalierbar (50–400 %, Host-Fenster einfach in der Ecke ziehen).
 
@@ -40,6 +40,7 @@ Verarbeitungsreihenfolge pro (oversampled) Sample (Fig. 1):
 | THRESHOLD | `Threshold` | −20…+10 dB | Schwelle → Potentiometer-Einstellung φAC = (thr+20)/30 |
 | TIME CONSTANT | `Time Constant` | 1…5 | Stellung des Zeitkonstanten-Netzwerks (Tabelle 3, Pos. 1–5) |
 | OUTPUT GAIN | `Output Gain` | 0…20 dB | Ausgangstrim/Make-up-Gain |
+| TRIM | `Trim` | −24…0 dB | Ausgangs-Lautstärke (nur leiser) |
 | (nicht auf Panel) | `Oversampling` | 1×/2×/4×/8× | Standard 8× wie im Paper |
 | (nicht auf Panel) | `Stereo Mode` | L/R, M/S | gekoppelter Stereo-Betrieb oder Mitten/Seite |
 

@@ -38,6 +38,7 @@ public:
 	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
 	VSTGUI::CMouseEventResult onMouseMoved (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
 	VSTGUI::CMouseEventResult onMouseUp (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
+	void onMouseWheelEvent (VSTGUI::MouseWheelEvent& event) override;
 	CLASS_METHODS_NOCOPY (KnobControl, VSTGUI::CControl)
 private:
 	double lastY = 0.0;
@@ -81,6 +82,7 @@ public:
 	KnobControl* knobThreshold = nullptr;
 	KnobControl* knobTimeConst = nullptr;
 	KnobControl* knobOutput = nullptr;
+	KnobControl* knobTrim = nullptr;
 	SwitchControl* swPower = nullptr;
 	VuMeterView* meter = nullptr;
 	bool lampOn = true;              // gelbe Lampe (Power an)

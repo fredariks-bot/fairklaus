@@ -94,6 +94,7 @@ CMouseEventResult KnobControl::onMouseMoved (CPoint& where, const CButtonState& 
 		lastY = where.y;
 		setValueNormalized (getValueNormalized () + dy * 0.005);
 		valueChanged ();
+		setDirty (true);
 		return kMouseEventHandled;
 	}
 	return kMouseEventNotHandled;
@@ -103,6 +104,19 @@ CMouseEventResult KnobControl::onMouseUp (CPoint&, const CButtonState&)
 {
 	endEdit ();
 	return kMouseEventHandled;
+}
+
+void KnobControl::onMouseWheelEvent (MouseWheelEvent& event)
+{
+	if (event.deltaY != 0.0)
+	{
+		beginEdit ();
+		setValueNormalized (getValueNormalized () + (float) event.deltaY * 0.05f);
+		valueChanged ();
+		setDirty (true);
+		endEdit ();
+		event.consumed = true;
+	}
 }
 
 //------------------------------------------------------------------------
@@ -273,10 +287,11 @@ void PanelView::draw (CDrawContext* ctx)
 	ctx->drawEllipse (CRect (lampC.x - 9, lampC.y - 9, lampC.x + 9, lampC.y + 9), kDrawStroked);
 
 	// Knopf-Skalen + Labels
-	drawKnobScale (ctx, 400, 110, 42, "INPUT GAIN", { "0", "4", "8", "12", "16", "20" });
-	drawKnobScale (ctx, 550, 110, 42, "THRESHOLD", { "-20", "-10", "0", "+10" });
-	drawKnobScale (ctx, 700, 110, 42, "TIME CONSTANT", { "1", "2", "3", "4", "5" });
-	drawKnobScale (ctx, 850, 110, 42, "OUTPUT GAIN", { "0", "4", "8", "12", "16", "20" });
+	drawKnobScale (ctx, 390, 110, 40, "INPUT GAIN", { "0", "4", "8", "12", "16", "20" });
+	drawKnobScale (ctx, 525, 110, 40, "THRESHOLD", { "-20", "-10", "0", "+10" });
+	drawKnobScale (ctx, 660, 110, 40, "TIME CONSTANT", { "1", "2", "3", "4", "5" });
+	drawKnobScale (ctx, 795, 110, 40, "OUTPUT GAIN", { "0", "4", "8", "12", "16", "20" });
+	drawKnobScale (ctx, 945, 110, 40, "TRIM", { "-24", "-18", "-12", "-6", "0" });
 
 	// Titel
 	ctx->setFont (fontTitle);
@@ -306,11 +321,12 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	panel = new PanelView (r, processor);
 	frame->addView (panel);
 
-	const double kCy = 110, kRad = 42;
-	panel->knobInput     = new KnobControl (CRect (400 - kRad, kCy - kRad, 400 + kRad, kCy + kRad), this, kParamInputGain);
-	panel->knobThreshold = new KnobControl (CRect (550 - kRad, kCy - kRad, 550 + kRad, kCy + kRad), this, kParamThreshold);
-	panel->knobTimeConst = new KnobControl (CRect (700 - kRad, kCy - kRad, 700 + kRad, kCy + kRad), this, kParamTimeConstant);
-	panel->knobOutput    = new KnobControl (CRect (850 - kRad, kCy - kRad, 850 + kRad, kCy + kRad), this, kParamOutputGain);
+	const double kCy = 110, kRad = 40;
+	panel->knobInput     = new KnobControl (CRect (390 - kRad, kCy - kRad, 400 + kRad, kCy + kRad), this, kParamInputGain);
+	panel->knobThreshold = new KnobControl (CRect (525 - kRad, kCy - kRad, 550 + kRad, kCy + kRad), this, kParamThreshold);
+	panel->knobTimeConst = new KnobControl (CRect (660 - kRad, kCy - kRad, 700 + kRad, kCy + kRad), this, kParamTimeConstant);
+	panel->knobOutput    = new KnobControl (CRect (795 - kRad, kCy - kRad, 850 + kRad, kCy + kRad), this, kParamOutputGain);
+	panel->knobTrim      = new KnobControl (CRect (945 - kRad, kCy - kRad, 945 + kRad, kCy + kRad), this, kParamTrim);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
 	panel->meter   = new VuMeterView (CRect (120, 25, 312, 225));
 
@@ -318,6 +334,7 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	frame->addView (panel->knobThreshold);
 	frame->addView (panel->knobTimeConst);
 	frame->addView (panel->knobOutput);
+	frame->addView (panel->knobTrim);
 	frame->addView (panel->swPower);
 	frame->addView (panel->meter);
 
@@ -328,6 +345,7 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->knobThreshold, kParamThreshold);
 	sync (panel->knobTimeConst, kParamTimeConstant);
 	sync (panel->knobOutput, kParamOutputGain);
+	sync (panel->knobTrim, kParamTrim);
 	sync (panel->swPower, kParamPower);
 
 	if (!frame->open (parent, platformType))
@@ -399,6 +417,7 @@ void PanelEditor::pollParameters ()
 		sync (panel->knobThreshold, kParamThreshold);
 		sync (panel->knobTimeConst, kParamTimeConstant);
 		sync (panel->knobOutput, kParamOutputGain);
+	sync (panel->knobTrim, kParamTrim);
 		sync (panel->swPower, kParamPower);
 			panel->setDirty ();
 	}
