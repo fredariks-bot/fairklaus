@@ -20,9 +20,9 @@ if(FAIRKLAUS_EDITOR_AVAILABLE AND NOT WIN32 AND X11_FOUND)
     add_executable(gui_smoke gui_smoke.cpp)
     target_include_directories(gui_smoke PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/vst3sdk ${CMAKE_SOURCE_DIR}/vst3sdk/vstgui4)
     target_compile_features(gui_smoke PRIVATE cxx_std_17)
-    # WICHTIG: kein vstgui statisch linken — sonst doppelte Platform-Singletons (Segfault).
-    # Alle VSTGUI-Aufrufe laufen ueber die Vtable der .so im Plugin.
-    target_link_libraries(gui_smoke PRIVATE sdk ${CMAKE_DL_LIBS} ${X11_LIBRARIES})
+    # vstgui wird fuer non-virtuelle Symbole (CView::getViewSize, Event-Ctors) gebraucht,
+    # aber keine Platform-Init im Test aufrufen — die lazy-Init laeuft in der .so des Plugins.
+    target_link_libraries(gui_smoke PRIVATE sdk vstgui vstgui_support ${CMAKE_DL_LIBS} ${X11_LIBRARIES})
     add_dependencies(gui_smoke punishchild670)
     find_program(XVFB_RUN_EXEC xvfb-run)
     if(XVFB_RUN_EXEC)
