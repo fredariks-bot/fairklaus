@@ -59,7 +59,7 @@ int main (int argc, char** argv)
 	XFlush (dpy);
 
 	(void) argc; (void) argv;
-	VSTGUI::initPlatform (nullptr);   // sonst ist die Platform-Factory null -> Segfault
+	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));   // sonst ist die Platform-Factory null -> Segfault
 	VSTGUI::X11::RunLoop::init ();   // eine einzige vstgui-Kopie (direkt gelinkt)
 	std::printf ("runloop init ok\n");
 
