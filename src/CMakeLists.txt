@@ -40,5 +40,5 @@ target_include_directories(punishchild660 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(FAIRKLAUS_EDITOR_AVAILABLE)
     target_compile_definitions(punishchild660 PRIVATE FAIRKLAUS_WITH_EDITOR=1)
-    target_link_libraries(punishchild660 PRIVATE vstgui vstgui_uidescription)
+    target_link_libraries(punishchild660 PRIVATE vstgui_support)
 endif()
