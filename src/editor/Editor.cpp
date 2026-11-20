@@ -3,6 +3,7 @@
 //=============================================================================
 #include "Editor.h"
 #include "../PunishChild660.h"
+#include "vstgui/lib/cvstguitimer.h"
 
 #include <cmath>
 #ifndef M_PI
@@ -300,7 +301,8 @@ PanelEditor::~PanelEditor ()
 
 bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformType)
 {
-	(void) parent; (void) platformType;
+	if (frame)
+		return true;
 	CRect r (0, 0, (int32) kPanelW, (int32) kPanelH);
 	frame = new CFrame (r, this);
 
@@ -334,6 +336,12 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->swPower, kParamPower);
 	sync (panel->swMains, kParamMains);
 
+	if (!frame->open (parent, platformType))
+	{
+		frame->forget ();
+		frame = nullptr;
+		return false;
+	}
 	return true;
 }
 
@@ -348,7 +356,14 @@ void PLUGIN_API PanelEditor::close ()
 	}
 }
 
-void PanelEditor::doIdleStuff ()
+VSTGUI::CMessageResult PanelEditor::notify (VSTGUI::CBaseObject* sender, const char* message)
+{
+	if (message == CVSTGUITimer::kMsgTimer)
+		pollParameters ();
+	return VSTGUIEditor::notify (sender, message);
+}
+
+void PanelEditor::pollParameters ()
 {
 	if (panel && panel->meter && processor)
 	{

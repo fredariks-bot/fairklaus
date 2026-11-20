@@ -90,9 +90,9 @@ private:
 	void drawKnobScale (VSTGUI::CDrawContext* ctx, double cx, double cy, double r,
 	                    const char* label, const std::vector<std::string>& marks);
 	PunishChild660* proc;
-	VSTGUI::CFontDesc* fontTitle = nullptr;
-	VSTGUI::CFontDesc* fontLabel = nullptr;
-	VSTGUI::CFontDesc* fontSmall = nullptr;
+	VSTGUI::SharedPointer<VSTGUI::CFontDesc> fontTitle;
+	VSTGUI::SharedPointer<VSTGUI::CFontDesc> fontLabel;
+	VSTGUI::SharedPointer<VSTGUI::CFontDesc> fontSmall;
 };
 
 //------------------------------------------------------------------------
@@ -107,12 +107,14 @@ public:
 
 	bool PLUGIN_API open (void* parent, const VSTGUI::PlatformType& platformType) override;
 	void PLUGIN_API close () override;
-	void doIdleStuff () override;
+	VSTGUI::CMessageResult notify (VSTGUI::CBaseObject* sender, const char* message) override;
 
 	// IControlListener
 	void valueChanged (VSTGUI::CControl* pControl) override;
 
 private:
+	void pollParameters ();
+
 	PunishChild660* processor;
 	PanelView* panel = nullptr;
 };
