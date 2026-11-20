@@ -14,6 +14,7 @@
 
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/base/ipluginbase.h"
+#include "Parameters.h"
 #include "pluginterfaces/vst/ivstaudioprocessor.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
 #include "pluginterfaces/vst/ivsteditcontroller.h"
@@ -189,7 +190,7 @@ int main (int argc, char** argv)
 	tresult rSet = component->setState (&ms);
 	std::printf ("setState -> %d\n", (int) rSet);
 	expect (rSet == kResultOk, "setState");
-	expect (controller->getParamNormalized (3) == 1.0, "State-Roundtrip: Threshold wieder +10 dB");
+	expect (controller->getParamNormalized (fairklaus::kParamThreshold) == 1.0, "State-Roundtrip: Threshold wieder +10 dB");
 
 	// 4) setActive/terminate/initialize-Zyklen wie der SDK-Validator
 	for (int i = 0; i < 4; ++i)
