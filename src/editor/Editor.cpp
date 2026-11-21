@@ -380,7 +380,7 @@ PanelEditor::~PanelEditor ()
 
 bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformType)
 {
-	std::fprintf (stderr, "open: enter parent=%p type=%s\n", parent, platformType);
+	std::fprintf (stderr, "open: enter parent=%p\n", parent);
 	if (frame)
 		return true;
 	CRect r (0, 0, (int32) kPanelW, (int32) kPanelH);
