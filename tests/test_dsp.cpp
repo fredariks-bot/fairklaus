@@ -248,11 +248,12 @@ static void testModelStatic ()
 	double a, b;
 	for (long i = 0; i < (long) (0.3 * fsOs); ++i) m.processOs (0.0, 0.0, a, b);
 	double maxOut = 0.0;
+	const long nSkip = (long) (0.2 * fsOs);   // Attack-Transient abwarten (Sidechain baut Vsc erst auf)
 	for (long i = 0; i < (long) (0.5 * fsOs); ++i)
 	{
 		const double x = 0.9 * std::sin (2.0 * M_PI * 1000.0 * i / fsOs);
 		m.processOs (x, x, a, b);
-		maxOut = std::max (maxOut, std::fabs (a));
+		if (i > nSkip) maxOut = std::max (maxOut, std::fabs (a));
 	}
 	const double gr = m.gainReductionDb ();
 	std::printf ("  thr=+10, in=0.9: maxOut=%.4f  GR=%.2f dB\n", maxOut, gr);

@@ -57,9 +57,10 @@ struct Fairchild670
 		voutLPrev = 0.0;
 		voutRPrev = 0.0;
 		psuPhase = 0.0;
+		peakDecay = std::exp (-1.0 / (0.020 * fsBase));   // ~20 ms Spitzenwert-Haltung
+		peakIn = 0.0;
+		peakOut = 0.0;
 		warmup (0.5);
-		iaRestL = std::max (ampL.push.iaLast, 1e-9);
-		iaRestR = std::max (ampR.push.iaLast, 1e-9);
 		grSmooth = 0.0;
 	}
 
@@ -81,11 +82,13 @@ struct Fairchild670
 
 	void setMainsHz (double hz) { mainsHz = hz; }
 
-	// Pegel-Anpassung Plugin <-> Schaltung: 0 dBFS (1.0) entspricht ~2 V in der
-	// Schaltung (Arbeitspunkt des 670 bei ca. +4 dBm), damit das Limiting nahe
-	// Vollaussteuerung greift. outputScale macht die Ruhverstärkung (~0.46) zu unity.
-	double inputScale = 2.0;
-	double outputScale = 1.087;   // = 1 / (inputScale * 0.46)
+	// Pegel-Anpassung Plugin <-> Schaltung: 0 dBFS (1.0) entspricht ~6 V in der
+	// Schaltung. Damit greift die Sidechain (Schwelle phi'DC = 2.44 V an
+	// Vpot = phiAC*V_Rload/2) schon bei mittleren Pegeln und der Threshold-Regler
+	// hat einen weiten, hörbaren Wirkungsbereich. outputScale macht die
+	// Kleinsignalverstärkung des Signalamps (~0.80) zu unity.
+	double inputScale = 6.0;
+	double outputScale = 0.2074;   // = 1 / (inputScale * 0.8035)
 
 	// Ein Block bei Basisabtastrate verarbeiten
 	void processBlock (const double* inL, const double* inR, double* outL, double* outR, int n)
@@ -114,21 +117,26 @@ struct Fairchild670
 			ampL.pull.setPsuRipple (psuPhase);
 			ampR.push.setPsuRipple (psuPhase);
 			ampR.pull.setPsuRipple (psuPhase);
-			osL.upsampleInto (inputScale * inL[i], hiL);
-			osR.upsampleInto (inputScale * inR[i], hiR);
+			osL.upsampleInto (inL[i], hiL);
+			osR.upsampleInto (inR[i], hiR);
 			for (int k = 0; k < N; ++k)
 			{
 				double oL, oR;
 				processOs (hiL[k], hiR[k], oL, oR);
-				osL.downsample (outputScale * oL, [&] (double v) { outL[i] = v; });
-				osR.downsample (outputScale * oR, [&] (double v) { outR[i] = v; });
+				osL.downsample (oL, [&] (double v) { outL[i] = v; });
+				osR.downsample (oR, [&] (double v) { outR[i] = v; });
 			}
 		}
 	}
 
-	// Ein einzelner Modellschritt bei der überabgetasteten Rate
+	// Ein einzelner Modellschritt bei der überabgetasteten Rate.
+	// Ein-/Ausgabe in Plugin-Pegeln (FS); die Pegelanpassung in die Schaltung
+	// (inputScale/outputScale) passiert hier innen, damit processOs() direkt
+	// mit Plugin-Pegeln arbeitet (Tests) wie processBlock().
 	void processOs (double inL, double inR, double& outL, double& outR)
 	{
+		const double sL = inputScale * inL;
+		const double sR = inputScale * inR;
 
 		// 1)+2) Sidechain + Zeitkonstanten-Netzwerk laufen auf Basisrate
 		// (Vsc ist durch das TC-Netzwerk ohnehin träge; spart 7/8 der Rechenlast)
@@ -143,16 +151,26 @@ struct Fairchild670
 		}
 
 		// 3) Signalverstärker mit Vx = Vbias - Vsc(t-1)
-		outL = ampL.process (inL, vsc);
-		outR = ampR.process (inR, vsc);
+		const double oL = ampL.process (sL, vsc);
+		const double oR = ampR.process (sR, vsc);
 
-		voutLPrev = outL;
-		voutRPrev = outR;
+		voutLPrev = oL;   // Schaltungs-Volt: Sidechain tastet Vout ab
+		voutRPrev = oR;
+		outL = outputScale * oL;   // zurück auf Plugin-Pegel
+		outR = outputScale * oR;
 
-		// Gain-Reduction für Anzeige nur auf Basisrate (jedes N-te Sample)
+		// Gain-Reduction für Anzeige nur auf Basisrate: echte Pegel-Hüllkurve
+		// Ein/Aus (Plugin-Pegel) — GR = 20*log10(peakIn/peakOut), keine Fehl-Anzeige
+		// durch Röhren-Grid-Strom bei hohem Pegel.
 		if ((grCounter++ & (oversampling - 1)) == 0)
 		{
-			const double gr = 0.5 * (ampL.gainReductionDb (iaRestL) + ampR.gainReductionDb (iaRestR));
+			peakIn  = std::max (std::fabs (inL),  peakIn  * peakDecay);
+			peakOut = std::max (std::fabs (outL), peakOut * peakDecay);
+			double gr = 0.0;
+			if (peakIn > 1e-4 && peakOut > 1e-9)
+				gr = 20.0 * std::log10 (peakIn / peakOut);
+			if (!(gr > 0.0)) gr = 0.0;
+			if (gr > 60.0) gr = 60.0;
 			const double c = gr > grSmooth ? std::exp (-1.0 / (0.005 * fsBase))   // Attack ~5 ms
 			                               : std::exp (-1.0 / (0.300 * fsBase));  // Release ~300 ms
 			grSmooth += (gr - grSmooth) * (1.0 - c);
@@ -189,7 +207,7 @@ public:
 	double dbgVRloadL () const { return scL.dbgVRload; }
 private:
 	double voutLPrev = 0.0, voutRPrev = 0.0;
-	double iaRestL = 1e-6, iaRestR = 1e-6;
+	double peakIn = 0.0, peakOut = 0.0, peakDecay = 0.999;
 	double grSmooth = 0.0;
 	double phiAC = 0.0;
 	int tcPos = 5;
