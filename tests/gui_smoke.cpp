@@ -168,7 +168,7 @@ int main ()
 
 	// --- Wheel auf Time-Constant (Detents): eine Stufe pro Raster ---
 	{
-		ctrl->setParamNormalized (fairklaus::kParamTimeConstant, 1.0);   // 5
+		tc.setValueNormalized (1.0f);   // Knopf selbst auf 5 (Param wird vom Handler gesetzt)
 		VSTGUI::MouseWheelEvent wheel;
 		wheel.mousePosition = VSTGUI::CPoint (660, 110);
 		wheel.deltaY = -1.0;

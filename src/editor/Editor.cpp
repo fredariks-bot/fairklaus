@@ -88,9 +88,11 @@ CMouseEventResult KnobControl::onMouseDown (CPoint& where, const CButtonState& b
 		const double dist = std::sqrt (dx * dx + dy * dy);
 		if (dist > knobRad * 0.72)
 		{
-			double a = std::atan2 (dy, dx) * 180.0 / M_PI;   // knobAngle(v) = 135 + 270*v
-			if (a < 45.0) a += 360.0;                        // Luecke unten -> oberer Rand
-			double v = (a - 135.0) / 270.0;
+			double a = std::atan2 (dy, dx) * 180.0 / M_PI;   // [-180,180], knobAngle(v) = 135 + 270*v
+			double v;
+			if (a <= 45.0)       v = (a + 225.0) / 270.0;   // rechter Rand (0..45 deg) -> nahe 1.0
+			else if (a >= 135.0) v = (a - 135.0) / 270.0;   // linker Rand (135..180) -> nahe 0.0
+			else                 v = (a < 90.0) ? 1.0 : 0.0; // tote Zone oben -> naechstes Ende
 			if (v < 0.0) v = 0.0;
 			if (v > 1.0) v = 1.0;
 			beginEdit ();
