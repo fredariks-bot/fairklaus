@@ -6,6 +6,7 @@
 #include "vstgui/lib/cvstguitimer.h"
 
 #include <cmath>
+#include <cstdio>
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -379,13 +380,16 @@ PanelEditor::~PanelEditor ()
 
 bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformType)
 {
+	std::fprintf (stderr, "open: enter parent=%p type=%s\n", parent, platformType.c_str ());
 	if (frame)
 		return true;
 	CRect r (0, 0, (int32) kPanelW, (int32) kPanelH);
 	frame = new CFrame (r, this);
+	std::fprintf (stderr, "open: frame=%p\n", (void*) frame);
 
 	panel = new PanelView (r, processor);
 	frame->addView (panel);
+	std::fprintf (stderr, "open: panel ok\n");
 
 	const double kCy = 110, kRad = 40, kHit = kRad + 26;   // Hit-Flaeche inkl. Skalenring
 	panel->knobInput     = new KnobControl (CRect (390 - kHit, kCy - kHit, 390 + kHit, kCy + kHit), this, kParamInputGain);
@@ -420,12 +424,15 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->swPower, kParamPower);
 	sync (panel->osSel, kParamOversampling);
 
+	std::fprintf (stderr, "open: vor frame->open\n");
 	if (!frame->open (parent, platformType))
 	{
+		std::fprintf (stderr, "open: frame->open false -> forget\n");
 		frame->forget ();
 		frame = nullptr;
 		return false;
 	}
+	std::fprintf (stderr, "open: ok\n");
 	return true;
 }
 
