@@ -7,7 +7,26 @@
 //=============================================================================
 #include <cstdio>
 #include <cmath>
+#include <cstdint>
 #include <dlfcn.h>
+
+// X11 zuerst, dann die kollidierenden Makros entfernen, bevor VSTGUI kommt
+#include <X11/Xlib.h>
+#ifdef None
+#undef None
+#endif
+#ifdef Bool
+#undef Bool
+#endif
+#ifdef Status
+#undef Status
+#endif
+#ifdef True
+#undef True
+#endif
+#ifdef False
+#undef False
+#endif
 
 #include "Parameters.h"
 #include "PunishChild670.h"     // zuerst: sonst kollidiert das setState-Makro
@@ -36,9 +55,15 @@ static void expect (bool ok, const char* what)
 int main ()
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
-	// X11-Platform initialisieren (DISPLAY kommt von xvfb-run); eigener Window noetig:
-	// VSTGUIs Linux-Unittests attachen mit parent=nullptr + kX11EmbedWindowID.
 	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));
+
+	Display* dpy = XOpenDisplay (nullptr);
+	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
+	if (!dpy) return 2;
+	Window win = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy), 0, 0, 1058, 297, 0,
+	                                  BlackPixel (dpy, 0), BlackPixel (dpy, 0));
+	XMapWindow (dpy, win);
+	XFlush (dpy);
 
 	auto* comp = static_cast<IComponent*> (new fairklaus::PunishChild670 ());
 	expect (comp->initialize (nullptr) == kResultOk, "initialize");
@@ -55,7 +80,7 @@ int main ()
 	{
 		expect (view->isPlatformTypeSupported (Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
 		        "X11EmbedWindowID unterstuetzt");
-		expect (view->attached (nullptr, Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
+		expect (view->attached ((void*) (uintptr_t) win, Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
 		        "attached (Editor in X11-Fenster geoeffnet)");
 		ViewRect sz {};
 		view->getSize (&sz);
@@ -72,7 +97,7 @@ int main ()
 		             (int) (sz.right - sz.left), (int) (sz.bottom - sz.top));
 		expect (std::fabs ((sz.right - sz.left) - 2116) < 8, "onSize zoomt auf 2x");
 
-		ViewRect small (0, 0, 400, 200);  // < 0.5x -> clamp auf 0.5x = 529x148.5
+		ViewRect small (0, 0, 400, 200);  // < 0.5x -> clamp auf 0.5x = 529x149
 		view->onSize (&small);
 		view->getSize (&sz);
 		std::printf ("size nach onSize(400px) = %d x %d (erwartet ~529 x 149, Zoom-Clamp 0.5)\n",
@@ -84,7 +109,7 @@ int main ()
 
 		// Reaper oeffnet/schliesst Fenster ggf. mehrfach -> re-attach testen
 		expect (view->removed () == kResultTrue, "removed (close)");
-		expect (view->attached (nullptr, Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
+		expect (view->attached ((void*) (uintptr_t) win, Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
 		        "re-attached nach removed");
 		view->getSize (&sz);
 		expect (std::fabs ((sz.right - sz.left) - 1058) < 4, "nach re-attach wieder 1058 breit");
@@ -92,6 +117,8 @@ int main ()
 		view->release ();
 	}
 
+	XDestroyWindow (dpy, win);
+	XCloseDisplay (dpy);
 	VSTGUI::exitPlatform ();
 	comp->setActive (false);
 	comp->terminate ();

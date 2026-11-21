@@ -6,7 +6,6 @@
 #include "vstgui/lib/cvstguitimer.h"
 
 #include <cmath>
-#include <cstdio>
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -380,26 +379,23 @@ PanelEditor::~PanelEditor ()
 
 bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformType)
 {
-	std::fprintf (stderr, "open: enter parent=%p\n", parent);
 	if (frame)
 		return true;
 	CRect r (0, 0, (int32) kPanelW, (int32) kPanelH);
 	frame = new CFrame (r, this);
-	std::fprintf (stderr, "open: frame=%p\n", (void*) frame);
 
 	panel = new PanelView (r, processor);
 	frame->addView (panel);
-	std::fprintf (stderr, "open: panel ok\n");
 
 	const double kCy = 110, kRad = 40, kHit = kRad + 26;   // Hit-Flaeche inkl. Skalenring
 	panel->knobInput     = new KnobControl (CRect (390 - kHit, kCy - kHit, 390 + kHit, kCy + kHit), this, kParamInputGain);
 	panel->knobThreshold = new KnobControl (CRect (525 - kHit, kCy - kHit, 525 + kHit, kCy + kHit), this, kParamThreshold);
 	panel->knobTimeConst = new KnobControl (CRect (660 - kHit, kCy - kHit, 660 + kHit, kCy + kHit), this, kParamTimeConstant);
+	panel->knobOutput    = new KnobControl (CRect (795 - kHit, kCy - kHit, 795 + kHit, kCy + kHit), this, kParamOutputGain);
+	panel->knobTrim      = new KnobControl (CRect (945 - kHit, kCy - kHit, 945 + kHit, kCy + kHit), this, kParamTrim);
 	panel->knobTimeConst->setDetents (5);   // rastet bei 1..5 ein
 	for (auto* k : { panel->knobInput, panel->knobThreshold, panel->knobTimeConst, panel->knobOutput, panel->knobTrim })
 		k->setKnobRadius (kRad);
-	panel->knobOutput    = new KnobControl (CRect (795 - kHit, kCy - kHit, 795 + kHit, kCy + kHit), this, kParamOutputGain);
-	panel->knobTrim      = new KnobControl (CRect (945 - kHit, kCy - kHit, 945 + kHit, kCy + kHit), this, kParamTrim);
 	panel->osSel = new OsSelector (CRect (52, 158, 78, 206), this, kParamOversampling);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
 	panel->meter   = new VuMeterView (CRect (120, 25, 312, 225));
@@ -424,15 +420,13 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->swPower, kParamPower);
 	sync (panel->osSel, kParamOversampling);
 
-	std::fprintf (stderr, "open: vor frame->open\n");
 	if (!frame->open (parent, platformType))
 	{
-		std::fprintf (stderr, "open: frame->open false -> forget\n");
 		frame->forget ();
 		frame = nullptr;
+		panel = nullptr;
 		return false;
 	}
-	std::fprintf (stderr, "open: ok\n");
 	return true;
 }
 
