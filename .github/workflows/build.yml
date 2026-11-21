@@ -34,6 +34,9 @@ jobs:
       - name: Tests (DSP + Host-Simulation + GUI-Smoke)
         run: cd build && ctest --output-on-failure
 
+      - name: GUI-Live-Test Backtrace (gdb, nur Diagnose)
+        run: xvfb-run -a gdb -batch -ex run -ex bt --args ./build/tests/gui_live 2>&1 | tail -50 || true
+
       - name: GUI-Live-Test (Editor in echtem X11-Fenster via xvfb, attach/resize/detach/re-attach)
         run: xvfb-run -a ./build/tests/gui_live
 
