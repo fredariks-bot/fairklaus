@@ -44,6 +44,15 @@
 // sonst aus linuxmain.cpp des Plugins; hier selbst definieren (gui_live ist kein Modul)
 void* moduleHandle = nullptr;
 
+// minimaler IRunLoop fuers Test-Host-Seite (echte DAW pumpt hier X-Events/Timer)
+struct TestRunLoop : VSTGUI::IRunLoop
+{
+	bool registerEventHandler (int, VSTGUI::IEventHandler*) override { return true; }
+	bool unregisterEventHandler (VSTGUI::IEventHandler*) override { return true; }
+	bool registerTimer (uint64_t, VSTGUI::ITimerHandler*) override { return true; }
+	bool unregisterTimer (VSTGUI::ITimerHandler*) override { return true; }
+};
+
 using namespace Steinberg;
 using namespace Steinberg::Vst;
 
@@ -58,8 +67,9 @@ int main ()
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
 	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));
-	// wie die VSTGUI-Standalone-App: X11-RunLoop bei der Factory registrieren, dann xcb oeffnen
-	VSTGUI::getPlatformFactory ().asLinuxFactory ()->setRunLoop (VSTGUI::X11::RunLoop::get ());
+	// Host-Seite: IRunLoop registrieren (sonst crasht X11::RunLoop::init), dann xcb oeffnen
+	VSTGUI::SharedPointer<VSTGUI::IRunLoop> testRunLoop (new TestRunLoop (), false);
+	VSTGUI::getPlatformFactory ().asLinuxFactory ()->setRunLoop (testRunLoop);
 	VSTGUI::X11::RunLoop::init ();
 
 	Display* dpy = XOpenDisplay (nullptr);
