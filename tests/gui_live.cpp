@@ -59,7 +59,7 @@ int main ()
 	setvbuf (stdout, nullptr, _IONBF, 0);
 	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));
 	// wie die VSTGUI-Standalone-App: X11-RunLoop bei der Factory registrieren, dann xcb oeffnen
-	VSTGUI::getPlatformFactory ().asLinuxFactory ()->setRunLoop (&VSTGUI::X11::RunLoop::instance ());
+	VSTGUI::getPlatformFactory ().asLinuxFactory ()->setRunLoop (VSTGUI::X11::RunLoop::get ());
 	VSTGUI::X11::RunLoop::init ();
 
 	Display* dpy = XOpenDisplay (nullptr);
