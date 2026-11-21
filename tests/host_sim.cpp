@@ -11,6 +11,8 @@
 #include <dlfcn.h>
 #include <string>
 #include <vector>
+#include <thread>
+#include <atomic>
 
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/base/ipluginbase.h"
@@ -191,6 +193,31 @@ int main (int argc, char** argv)
 	std::printf ("setState -> %d\n", (int) rSet);
 	expect (rSet == kResultOk, "setState");
 	expect (controller->getParamNormalized (fairklaus::kParamThreshold) == 1.0, "State-Roundtrip: Threshold wieder +10 dB");
+
+	// 3b) Thread-Stress (Reaper-Absturz-Szenario): UI-Thread aendert Parameter
+	//     (v.a. Oversampling -> setSampleRate mit Allokation + warmup) waehrend
+	//     der Audio-Thread process() faehrt. Darf weder crashen noch NaN liefern.
+	{
+		std::atomic<bool> stop { false };
+		std::atomic<bool> procOk { true };
+		std::thread ui ([&] () {
+			const double osVals[4] = { 0.0, 1.0 / 3.0, 2.0 / 3.0, 1.0 };
+			int k = 0;
+			while (!stop.load (std::memory_order_relaxed))
+			{
+				controller->setParamNormalized (fairklaus::kParamOversampling, osVals[k & 3]);
+				controller->setParamNormalized (fairklaus::kParamThreshold, (k & 1) ? 1.0 : 0.0);
+				controller->setParamNormalized (fairklaus::kParamTimeConstant, (double) ((k % 4)) / 4.0);
+				++k;
+			}
+		});
+		for (int b = 0; b < 400; ++b)
+			if (runBlock (0.8, 440.0, 1) > 1e29) procOk = false;
+		stop = true;
+		ui.join ();
+		expect (procOk.load (), "Thread-Stress: process() neben setParamNormalized (kein Crash/NaN)");
+		setP (kParamOversampling, 2.0 / 3.0);   // zurueck auf 4x
+	}
 
 	// 4) setActive/terminate/initialize-Zyklen wie der SDK-Validator
 	for (int i = 0; i < 4; ++i)

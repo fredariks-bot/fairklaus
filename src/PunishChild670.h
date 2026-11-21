@@ -69,6 +69,9 @@ private:
 	double inputGainLin = 1.0, outputGainLin = 1.0, trimLin = 1.0;
 	double inputGainSmooth = 1.0, trimSmooth = 1.0;   // geglaettet gegen Clicks
 	int osFactor = 4;   // Default 4x (CPU); ueber Parameter 1/2/4/8x
+	// OS/TC duerfen das Modell nicht vom UI-Thread umschalten (setSampleRate
+	// allokiert, TC rewired die WDF-Adaptoren) -> process() wendet sie an:
+	std::atomic<int> pendingTcPos { -1 };
 	double powerMix = 1.0;      // 1 = an, 0 = Bypass
 	double powerTarget = 1.0;
 

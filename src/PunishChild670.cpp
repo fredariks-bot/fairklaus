@@ -134,17 +134,22 @@ void PunishChild670::applyParameter (Steinberg::Vst::ParamID id, double normaliz
 		case kParamPower: powerTarget = plain > 0.5 ? 1.0 : 0.0; break;
 		case kParamInputGain: inputGainLin = std::pow (10.0, plain / 20.0); break;
 		case kParamThreshold: model.setThreshold (plain); break;
-		case kParamTimeConstant: model.setTimeConstantPos ((int) plain + 0.5); break;
+		case kParamTimeConstant: pendingTcPos.store ((int) plain + 0.5); break;   // siehe process()
 		case kParamOutputGain: outputGainLin = std::pow (10.0, plain / 20.0); break;
 		case kParamTrim: trimLin = std::pow (10.0, plain / 20.0); break;
 		case kParamOversampling:
 		{
+			// WICHTIG: kein model.setSampleRate() hier! setParamNormalized/setState
+			// werden vom Host (z.B. Reaper) auf dem UI-/Main-Thread aufgerufen,
+			// waehrend process() auf dem Audio-Thread laeuft. setSampleRate()
+			// allokiert (hiL, Oversampler) und warmup() rechnet 0.5 s DSP ->
+			// use-after-free/Absturz. Nur osFactor setzen; process() wendet die
+			// neue Rate auf dem Audio-Thread an (siehe process()).
 			static const int factors[4] = { 1, 2, 4, 8 };
 			int idx = (int) plain;
 			if (idx < 0) idx = 0;
 			if (idx > 3) idx = 3;
 			osFactor = factors[idx];
-			model.setSampleRate (sampleRate, osFactor);
 			break;
 		}
 		case kParamStereoMode: break; // wird in process() gelesen
@@ -181,6 +186,16 @@ tresult PLUGIN_API PunishChild670::process (ProcessData& data)
 				setParamNormalized (queue->getParameterId (), value);
 			}
 		}
+	}
+
+	// OS-Faktor/Abtastrate/Time-Constant NUR auf dem Audio-Thread umschalten
+	// (setSampleRate allokiert + warmup, TC rewired die WDF-Adaptoren;
+	//  nie vom UI-Thread via setParamNormalized/setState -> sonst Absturz).
+	if (model.fsBase != sampleRate || model.oversampling != osFactor)
+		model.setSampleRate (sampleRate, osFactor);
+	{
+		const int p = pendingTcPos.exchange (-1);
+		if (p >= 0) model.setTimeConstantPos (p);
 	}
 
 	auto* inBus = &data.inputs[0];
