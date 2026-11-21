@@ -48,9 +48,10 @@ KnobControl::KnobControl (const CRect& r, IControlListener* listener, int32 tag)
 
 void KnobControl::draw (CDrawContext* ctx)
 {
-	const CRect r = getViewSize ();
-	const CPoint c (r.getCenter ());
-	const double rad = r.getWidth () / 2.0;
+	const CRect vr = getViewSize ();
+	const CPoint c (vr.getCenter ());
+	const double rad = knobRad;
+	const CRect r (c.x - rad, c.y - rad, c.x + rad, c.y + rad);
 
 	// Schatten
 	ctx->setFillColor (CColor (0, 0, 0, 90));
@@ -79,6 +80,26 @@ CMouseEventResult KnobControl::onMouseDown (CPoint& where, const CButtonState& b
 {
 	if (buttons.isLeftButton ())
 	{
+		// Klick im aeusseren Ring (Skala/Zahlen): direkt auf den Winkel-Wert springen
+		const CRect vr = getViewSize ();
+		const CPoint c (vr.getCenter ());
+		const double dx = where.x - c.x;
+		const double dy = c.y - where.y;              // y-Achse nach oben
+		const double dist = std::sqrt (dx * dx + dy * dy);
+		if (dist > knobRad * 0.72)
+		{
+			double a = std::atan2 (dy, dx) * 180.0 / M_PI;   // knobAngle(v) = 135 + 270*v
+			if (a < 45.0) a += 360.0;                        // Luecke unten -> oberer Rand
+			double v = (a - 135.0) / 270.0;
+			if (v < 0.0) v = 0.0;
+			if (v > 1.0) v = 1.0;
+			beginEdit ();
+			setValueNormalized ((float) snap (v));
+			valueChanged ();
+			setDirty (true);
+			endEdit ();
+			return kMouseEventHandled;
+		}
 		lastY = where.y;
 		beginEdit ();
 		return kMouseEventHandled;
@@ -111,7 +132,9 @@ void KnobControl::onMouseWheelEvent (MouseWheelEvent& event)
 	if (event.deltaY != 0.0)
 	{
 		beginEdit ();
-		setValueNormalized ((float) snap (getValueNormalized () + (float) event.deltaY * 0.05f));
+		const double step = detents > 1 ? (event.deltaY > 0 ? 1.0 / (detents - 1) : -1.0 / (detents - 1))
+		                                : (double) event.deltaY * 0.05;
+		setValueNormalized ((float) snap (getValueNormalized () + step));
 		valueChanged ();
 		setDirty (true);
 		endEdit ();
@@ -316,8 +339,7 @@ void PanelView::draw (CDrawContext* ctx)
 	ctx->setFont (fontSmall);
 	ctx->setFontColor (kLabelWhite);
 	ctx->drawString ("ON",   CRect (20, 4, 110, 20), kLeftText);
-	ctx->drawString ("OS", CRect (84, 152, 124, 168), kLeftText);
-	ctx->drawString ("AUTO", CRect (84, 200, 140, 216), kLeftText);
+	ctx->drawString ("OS", CRect (30, 228, 110, 244), kLeftText);
 	ctx->drawString ("OFF",  CRect (20, 78, 110, 94), kLeftText);
 
 	// gelbe Lampe unter dem Power-Schalter
@@ -363,15 +385,16 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	panel = new PanelView (r, processor);
 	frame->addView (panel);
 
-	const double kCy = 110, kRad = 40;
-	panel->knobInput     = new KnobControl (CRect (390 - kRad, kCy - kRad, 390 + kRad, kCy + kRad), this, kParamInputGain);
-	panel->knobThreshold = new KnobControl (CRect (525 - kRad, kCy - kRad, 525 + kRad, kCy + kRad), this, kParamThreshold);
-	panel->knobTimeConst = new KnobControl (CRect (660 - kRad, kCy - kRad, 660 + kRad, kCy + kRad), this, kParamTimeConstant);
+	const double kCy = 110, kRad = 40, kHit = kRad + 26;   // Hit-Flaeche inkl. Skalenring
+	panel->knobInput     = new KnobControl (CRect (390 - kHit, kCy - kHit, 390 + kHit, kCy + kHit), this, kParamInputGain);
+	panel->knobThreshold = new KnobControl (CRect (525 - kHit, kCy - kHit, 525 + kHit, kCy + kHit), this, kParamThreshold);
+	panel->knobTimeConst = new KnobControl (CRect (660 - kHit, kCy - kHit, 660 + kHit, kCy + kHit), this, kParamTimeConstant);
 	panel->knobTimeConst->setDetents (5);   // rastet bei 1..5 ein
-	panel->knobOutput    = new KnobControl (CRect (795 - kRad, kCy - kRad, 795 + kRad, kCy + kRad), this, kParamOutputGain);
-	panel->knobTrim      = new KnobControl (CRect (945 - kRad, kCy - kRad, 945 + kRad, kCy + kRad), this, kParamTrim);
-	panel->osSel = new OsSelector (CRect (52, 146, 78, 184), this, kParamOversampling);
-	panel->swAuto = new SwitchControl (CRect (52, 192, 78, 230), this, kParamAuto);
+	for (auto* k : { panel->knobInput, panel->knobThreshold, panel->knobTimeConst, panel->knobOutput, panel->knobTrim })
+		k->setKnobRadius (kRad);
+	panel->knobOutput    = new KnobControl (CRect (795 - kHit, kCy - kHit, 795 + kHit, kCy + kHit), this, kParamOutputGain);
+	panel->knobTrim      = new KnobControl (CRect (945 - kHit, kCy - kHit, 945 + kHit, kCy + kHit), this, kParamTrim);
+	panel->osSel = new OsSelector (CRect (52, 158, 78, 206), this, kParamOversampling);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
 	panel->meter   = new VuMeterView (CRect (120, 25, 312, 225));
 
@@ -381,7 +404,6 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	frame->addView (panel->knobOutput);
 	frame->addView (panel->knobTrim);
 	frame->addView (panel->osSel);
-	frame->addView (panel->swAuto);
 	frame->addView (panel->swPower);
 	frame->addView (panel->meter);
 
@@ -395,7 +417,6 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->knobTrim, kParamTrim);
 	sync (panel->swPower, kParamPower);
 	sync (panel->osSel, kParamOversampling);
-	sync (panel->swAuto, kParamAuto);
 
 	if (!frame->open (parent, platformType))
 	{
@@ -469,7 +490,6 @@ void PanelEditor::pollParameters ()
 	sync (panel->knobTrim, kParamTrim);
 		sync (panel->swPower, kParamPower);
 	sync (panel->osSel, kParamOversampling);
-	sync (panel->swAuto, kParamAuto);
 			panel->setDirty ();
 	}
 }

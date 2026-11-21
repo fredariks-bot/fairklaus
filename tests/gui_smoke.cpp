@@ -151,38 +151,53 @@ int main ()
 	std::printf ("os nach Klick = %.2f (1.0 = 8x)\n", osVal);
 	expect (osVal > 0.99, "OS-Umschalter klickt auf 8x (norm 1.0)");
 
-	// --- AUTO-Gain: an -> Trim/Input-Parameter bewegen sich ---
+	// --- Klick auf Skalen-Zahl: TC-Knopf Mitte (660,110), "5" bei 45° -> (705,65) ---
+	{
+		ctrl->setParamNormalized (fairklaus::kParamTimeConstant, 0.0);   // 1
+		VSTGUI::CPoint click5 (705, 65);    // Zahl "5" (oben rechts)
+		tc.onMouseDown (click5, leftBtn);
+		const double tc5 = ctrl->getParamNormalized (fairklaus::kParamTimeConstant);
+		std::printf ("time-const nach Klick auf 5 = %.4f (erwartet 1.0)\n", tc5);
+		expect (tc5 > 0.99, "Klick auf Skalen-Zahl 5 springt auf 5");
+		VSTGUI::CPoint click1 (615, 65);    // Zahl "1" (oben links)
+		tc.onMouseDown (click1, leftBtn);
+		const double tc1 = ctrl->getParamNormalized (fairklaus::kParamTimeConstant);
+		std::printf ("time-const nach Klick auf 1 = %.4f (erwartet 0.0)\n", tc1);
+		expect (tc1 < 0.01, "Klick auf Skalen-Zahl 1 springt auf 1");
+	}
+
+	// --- Wheel auf Time-Constant (Detents): eine Stufe pro Raster ---
+	{
+		ctrl->setParamNormalized (fairklaus::kParamTimeConstant, 1.0);   // 5
+		VSTGUI::MouseWheelEvent wheel;
+		wheel.mousePosition = VSTGUI::CPoint (660, 110);
+		wheel.deltaY = -1.0;
+		tc.onMouseWheelEvent (wheel);   // 5 -> 4
+	}
+	const double tcWheel = ctrl->getParamNormalized (fairklaus::kParamTimeConstant);
+	std::printf ("time-const nach Wheel = %.4f (erwartet 0.75 = Pos 4)\n", tcWheel);
+	expect (std::fabs (tcWheel - 0.75) < 0.01, "Mausrad am Time-Constant schaltet eine Detent-Stufe weiter");
+
+	// --- Routing durch echtes CFrame: Events ueber frame->onMouse*Event ---
 	{
 		ctrl->setParamNormalized (fairklaus::kParamThreshold, 0.0);
-		ctrl->setParamNormalized (fairklaus::kParamTrim, 1.0);       // 0 dB
-		ctrl->setParamNormalized (fairklaus::kParamInputGain, 0.0);  // 0 dB
-		ctrl->setParamNormalized (fairklaus::kParamAuto, 1.0);
-		const double trimBefore = ctrl->getParamNormalized (fairklaus::kParamTrim);
-		// lautes Signal durch process() -> AUTO senkt Trim
-		const int32 N = 256;
-		std::vector<Sample32> inL (N), inR (N), outL (N), outR (N);
-		Sample32* inCh[2] = { inL.data (), inR.data () };
-		Sample32* outCh[2] = { outL.data (), outR.data () };
-		AudioBusBuffers inB, outB;
-		inB.numChannels = 2; inB.silenceFlags = 0; inB.channelBuffers32 = inCh;
-		outB.numChannels = 2; outB.silenceFlags = 0; outB.channelBuffers32 = outCh;
-		AudioBusBuffers inA[1] = { inB }, outA[1] = { outB };
-		for (int b = 0; b < 300; ++b)
-		{
-			for (int i = 0; i < N; ++i)
-			{
-				double x = 0.9 * std::sin (2 * M_PI * 1000 * (b * N + i) / 48000.0);
-				inL[i] = (Sample32) x; inR[i] = (Sample32) x;
-			}
-			ProcessData d {};
-			d.processMode = kRealtime; d.symbolicSampleSize = kSample32; d.numSamples = N;
-			d.numInputs = 1; d.numOutputs = 1; d.inputs = inA; d.outputs = outA;
-			ap->process (d);
-		}
-		const double trimAfter = ctrl->getParamNormalized (fairklaus::kParamTrim);
-		std::printf ("auto: trim %.3f -> %.3f\n", trimBefore, trimAfter);
-		expect (trimAfter < trimBefore - 0.01, "AUTO-Gain bewegt den Trim-Knopf (laut -> leiser)");
-		ctrl->setParamNormalized (fairklaus::kParamAuto, 0.0);
+		VSTGUI::CFrame frame (VSTGUI::CRect (0, 0, 1058, 297), editor);
+		fairklaus::KnobControl knob2 (VSTGUI::CRect (485, 70, 565, 150), editor, fairklaus::kParamThreshold);
+		frame.addView (&knob2);
+		knob2.setValueNormalized (0.0f);
+		VSTGUI::MouseDownEvent down (VSTGUI::CPoint (525, 110), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
+		frame.onMouseDownEvent (down);
+		VSTGUI::MouseMoveEvent move (VSTGUI::CPoint (525, 60), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
+		frame.onMouseMoveEvent (move);
+		VSTGUI::MouseUpEvent up (VSTGUI::CPoint (525, 60), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::None));
+		frame.onMouseUpEvent (up);
+		VSTGUI::MouseWheelEvent wheel;
+		wheel.mousePosition = VSTGUI::CPoint (525, 110);
+		wheel.deltaY = 1.0;
+		frame.onMouseWheelEvent (wheel);
+		const double thrFrame = ctrl->getParamNormalized (fairklaus::kParamThreshold);
+		std::printf ("thr nach Frame-Routing (drag+wheel) = %.4f\n", thrFrame);
+		expect (thrFrame > 0.2, "Events ueber CFrame-Routing aendern den Parameter");
 	}
 
 	// --- Power-Schalter: Klick toggelt auf 0 ---

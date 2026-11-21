@@ -68,9 +68,6 @@ private:
 	// geglättete Werte (Vermeidung von Clicks bei Parameterwechseln)
 	double inputGainLin = 1.0, outputGainLin = 1.0, trimLin = 1.0;
 	double inputGainSmooth = 1.0, trimSmooth = 1.0;   // geglaettet gegen Clicks
-	double inputPlainDb = 0.0, trimPlainDb = 0.0;       // fuer AUTO-Gain
-	double autoOn = 0.0;
-	Steinberg::uint32 autoBlockCounter = 0;
 	int osFactor = 4;   // Default 4x (CPU); ueber Parameter 1/2/4/8x
 	double powerMix = 1.0;      // 1 = an, 0 = Bypass
 	double powerTarget = 1.0;

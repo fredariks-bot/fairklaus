@@ -35,6 +35,7 @@ class KnobControl : public VSTGUI::CControl
 public:
 	KnobControl (const VSTGUI::CRect& r, VSTGUI::IControlListener* listener, Steinberg::int32 tag);
 	void setDetents (int n) { detents = n; }   // n Stufen -> rastet beim Ziehen ein (z.B. 5 fuer Time Constant)
+	void setKnobRadius (double r) { knobRad = r; }   // gezeichneter Radius (Hit-Flaeche darf groesser sein)
 	void draw (VSTGUI::CDrawContext* ctx) override;
 	VSTGUI::CMouseEventResult onMouseDown (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
 	VSTGUI::CMouseEventResult onMouseMoved (VSTGUI::CPoint& where, const VSTGUI::CButtonState& buttons) override;
@@ -49,6 +50,7 @@ private:
 	}
 	double lastY = 0.0;
 	int detents = 0;
+	double knobRad = 40.0;
 };
 
 //------------------------------------------------------------------------
@@ -103,7 +105,6 @@ public:
 	KnobControl* knobOutput = nullptr;
 	KnobControl* knobTrim = nullptr;
 	SwitchControl* swPower = nullptr;
-	SwitchControl* swAuto = nullptr;
 	VSTGUI::CControl* osSel = nullptr;
 	VuMeterView* meter = nullptr;
 	bool lampOn = true;              // gelbe Lampe (Power an)

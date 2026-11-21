@@ -59,9 +59,6 @@ PunishChild670::PunishChild670 ()
 	                               0., 3., 2., 3,   // Default 4x (CPU); 8x = Index 3
 	                               ParameterInfo::kCanAutomate | ParameterInfo::kIsList);
 	parameters.addParameter (os);
-	parameters.addParameter (new RangeParameter (STR ("Auto Gain"), kParamAuto, nullptr,
-	                                             0., 1., 0., 1,
-	                                             ParameterInfo::kCanAutomate | ParameterInfo::kIsList));
 	auto* sm = new RangeParameter (STR ("Stereo Mode"), kParamStereoMode, nullptr,
 	                               0., 1., 0., 1,
 	                               ParameterInfo::kCanAutomate | ParameterInfo::kIsList);
@@ -135,11 +132,11 @@ void PunishChild670::applyParameter (Steinberg::Vst::ParamID id, double normaliz
 	switch (id)
 	{
 		case kParamPower: powerTarget = plain > 0.5 ? 1.0 : 0.0; break;
-		case kParamInputGain: inputGainLin = std::pow (10.0, plain / 20.0); inputPlainDb = plain; break;
+		case kParamInputGain: inputGainLin = std::pow (10.0, plain / 20.0); break;
 		case kParamThreshold: model.setThreshold (plain); break;
 		case kParamTimeConstant: model.setTimeConstantPos ((int) plain + 0.5); break;
 		case kParamOutputGain: outputGainLin = std::pow (10.0, plain / 20.0); break;
-		case kParamTrim: trimLin = std::pow (10.0, plain / 20.0); trimPlainDb = plain; break;
+		case kParamTrim: trimLin = std::pow (10.0, plain / 20.0); break;
 		case kParamOversampling:
 		{
 			static const int factors[4] = { 1, 2, 4, 8 };
@@ -151,7 +148,6 @@ void PunishChild670::applyParameter (Steinberg::Vst::ParamID id, double normaliz
 			break;
 		}
 		case kParamStereoMode: break; // wird in process() gelesen
-		case kParamAuto: autoOn = plain > 0.5 ? 1.0 : 0.0; break;
 		default: break;
 	}
 }
@@ -249,7 +245,6 @@ tresult PLUGIN_API PunishChild670::process (ProcessData& data)
 
 	// Ausgangsverstärkung + Power-Bypass-Mischung (geglättet, ~5 ms)
 	const double ramp = 1.0 / std::max (1.0, 0.005 * sampleRate);
-	double accRms = 0.0;
 	for (int i = 0; i < numSamples; ++i)
 	{
 		powerMix += (powerTarget - powerMix) * ramp;
@@ -259,7 +254,6 @@ tresult PLUGIN_API PunishChild670::process (ProcessData& data)
 		const double gOut = outputGainLin * trimSmooth;
 		double l = outL[i] * gOut;
 		double r = outR[i] * gOut;
-		accRms += l * l + r * r;
 		if (midside)
 		{
 			const double s = 1.0 / std::sqrt (2.0);
@@ -290,28 +284,6 @@ tresult PLUGIN_API PunishChild670::process (ProcessData& data)
 				: 0.0;
 			if (sample64) ((Sample64*) outBus->channelBuffers64[ch])[i] = v;
 			else ((Sample32*) outBus->channelBuffers32[ch])[i] = (Sample32) v;
-		}
-	}
-
-	// AUTO-Gain: Ausgangspegel auf -18 dBFS regeln, indem Trim- (und ggf. Input-)Knopf bewegt werden
-	if (autoOn > 0.5 && powerMix > 0.5 && (autoBlockCounter++ % 32) == 0 && accRms > 0.0)
-	{
-		const double rms = std::sqrt (accRms / (2.0 * numSamples));
-		const double errDb = 20.0 * std::log10 (0.126 / std::max (rms, 1e-9));  // Ziel -18 dBFS
-		const double step = 0.2 * errDb;
-		double newTrim = trimPlainDb + step;
-		if (newTrim > 0.0) newTrim = 0.0;
-		if (newTrim < -24.0) newTrim = -24.0;
-		if ((newTrim == 0.0 && errDb > 0.0) || (newTrim == -24.0 && errDb < 0.0))
-		{
-			double g = inputPlainDb + step;   // Trim gesaettigt -> Input-Gain bewegen
-			if (g < 0.0) g = 0.0;
-			if (g > 20.0) g = 20.0;
-			setParamNormalized (kParamInputGain, g / 20.0);
-		}
-		else
-		{
-			setParamNormalized (kParamTrim, (newTrim + 24.0) / 24.0);
 		}
 	}
 

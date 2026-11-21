@@ -42,8 +42,7 @@ Verarbeitungsreihenfolge pro (oversampled) Sample (Fig. 1):
 | OUTPUT GAIN | `Output Gain` | 0…20 dB | Ausgangstrim/Make-up-Gain |
 | TRIM | `Trim` | −24…0 dB | Ausgangs-Lautstärke (nur leiser) |
 | OS (links unten) | `Oversampling` | 1×/2×/4×/8× (Klick zyklisch) | Default 4× (CPU); 8× wie im Paper möglich |
-| (nicht auf Panel) | `Stereo Mode` | L/R, M/S | gekoppelter Stereo-Betrieb oder Mitten/Seite |
-| AUTO (links unten) | `Auto Gain` | an/aus | regelt Ausgangspegel auf −18 dBFS, bewegt dabei TRIM- und ggf. INPUT-GAIN-Knopf automatisch |
+| (nicht auf Panel) | `Stereo Mode` | L/R, M/S | gekoppelter Stereo-Betrieb oder Mitten/Seite | `Auto Gain` | an/aus | regelt Ausgangspegel auf −18 dBFS, bewegt dabei TRIM- und ggf. INPUT-GAIN-Knopf automatisch |
 
 VU-Meter zeigt Gain Reduction in dB: `GR = (20/3)·log10(Ia_Ruhe / Ia_aktuell)`
 mit Ballistik ~5 ms Angriff / 300 ms Abfall (Paper Abschnitt 6).
