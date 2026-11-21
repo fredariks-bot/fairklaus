@@ -57,7 +57,9 @@ int main ()
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
 	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));
-	VSTGUI::X11::RunLoop::init ();   // xcb-Connection oeffnen (sonst crasht ChildWindow)
+	// wie die VSTGUI-Standalone-App: X11-RunLoop bei der Factory registrieren, dann xcb oeffnen
+	VSTGUI::getPlatformFactory ().asLinuxFactory ()->setRunLoop (&VSTGUI::X11::RunLoop::instance ());
+	VSTGUI::X11::RunLoop::init ();
 
 	Display* dpy = XOpenDisplay (nullptr);
 	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
