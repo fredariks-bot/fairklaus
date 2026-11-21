@@ -32,7 +32,8 @@
 #include "PunishChild670.h"     // zuerst: sonst kollidiert das setState-Makro
 #include "editor/Editor.h"
 #include "vstgui/lib/platform/platformfactory.h"
-#include "vstgui/lib/platform/linux/x11platform.h"   // X11::RunLoop::init() — Host macht das normalerweise
+#include "vstgui/lib/platform/linux/x11platform.h"
+#include "vstgui/lib/platform/linux/linuxfactory.h"
 
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
