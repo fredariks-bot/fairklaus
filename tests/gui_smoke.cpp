@@ -179,25 +179,28 @@ int main ()
 	expect (std::fabs (tcWheel - 0.75) < 0.01, "Mausrad am Time-Constant schaltet eine Detent-Stufe weiter");
 
 	// --- Routing durch echtes CFrame: Events ueber frame->onMouse*Event ---
+	// CFrame hat einen protected Destruktor -> Heap + forget(); das Frame
+	// gibt beim Zerstoeren seine Child-Views per forget() frei (Heap noetig).
 	{
 		ctrl->setParamNormalized (fairklaus::kParamThreshold, 0.0);
-		VSTGUI::CFrame frame (VSTGUI::CRect (0, 0, 1058, 297), editor);
-		fairklaus::KnobControl knob2 (VSTGUI::CRect (485, 70, 565, 150), editor, fairklaus::kParamThreshold);
-		frame.addView (&knob2);
-		knob2.setValueNormalized (0.0f);
+		auto* frame = new VSTGUI::CFrame (VSTGUI::CRect (0, 0, 1058, 297), editor);
+		auto* knob2 = new fairklaus::KnobControl (VSTGUI::CRect (485, 70, 565, 150), editor, fairklaus::kParamThreshold);
+		frame->addView (knob2);
+		knob2->setValueNormalized (0.0f);
 		VSTGUI::MouseDownEvent down (VSTGUI::CPoint (525, 110), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
-		frame.onMouseDownEvent (down);
+		frame->onMouseDownEvent (down);
 		VSTGUI::MouseMoveEvent move (VSTGUI::CPoint (525, 60), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::Left));
-		frame.onMouseMoveEvent (move);
+		frame->onMouseMoveEvent (move);
 		VSTGUI::MouseUpEvent up (VSTGUI::CPoint (525, 60), VSTGUI::MouseEventButtonState (VSTGUI::MouseButton::None));
-		frame.onMouseUpEvent (up);
+		frame->onMouseUpEvent (up);
 		VSTGUI::MouseWheelEvent wheel;
 		wheel.mousePosition = VSTGUI::CPoint (525, 110);
 		wheel.deltaY = 1.0;
-		frame.onMouseWheelEvent (wheel);
+		frame->onMouseWheelEvent (wheel);
 		const double thrFrame = ctrl->getParamNormalized (fairklaus::kParamThreshold);
 		std::printf ("thr nach Frame-Routing (drag+wheel) = %.4f\n", thrFrame);
 		expect (thrFrame > 0.2, "Events ueber CFrame-Routing aendern den Parameter");
+		frame->forget ();
 	}
 
 	// --- Power-Schalter: Klick toggelt auf 0 ---
