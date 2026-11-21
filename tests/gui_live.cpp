@@ -32,6 +32,7 @@
 #include "PunishChild670.h"     // zuerst: sonst kollidiert das setState-Makro
 #include "editor/Editor.h"
 #include "vstgui/lib/platform/platformfactory.h"
+#include "vstgui/lib/platform/linux/x11platform.h"   // X11::RunLoop::init() — Host macht das normalerweise
 
 #include "pluginterfaces/base/funknown.h"
 #include "pluginterfaces/vst/ivstcomponent.h"
@@ -56,6 +57,7 @@ int main ()
 {
 	setvbuf (stdout, nullptr, _IONBF, 0);
 	VSTGUI::initPlatform ((VSTGUI::PlatformInstanceHandle) dlopen (nullptr, RTLD_LAZY));
+	VSTGUI::X11::RunLoop::init ();   // xcb-Connection oeffnen (sonst crasht ChildWindow)
 
 	Display* dpy = XOpenDisplay (nullptr);
 	expect (dpy != nullptr, "XOpenDisplay (xvfb)");
@@ -119,6 +121,7 @@ int main ()
 
 	XDestroyWindow (dpy, win);
 	XCloseDisplay (dpy);
+	VSTGUI::X11::RunLoop::exit ();
 	VSTGUI::exitPlatform ();
 	comp->setActive (false);
 	comp->terminate ();
