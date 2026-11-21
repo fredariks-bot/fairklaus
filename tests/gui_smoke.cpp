@@ -216,7 +216,7 @@ int main ()
 
 	// --- View-Lifecycle ueber die Host-Schnittstelle (createView/onSize/release) ---
 	{
-		IPlugView* view = comp->createView (ViewType::kEditor);
+		IPlugView* view = ctrl->createView (ViewType::kEditor);
 		expect (view != nullptr, "createView(Editor) liefert View");
 		if (view)
 		{

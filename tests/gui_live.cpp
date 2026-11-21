@@ -49,13 +49,13 @@ int main ()
 	expect (comp->setActive (true) == kResultOk, "setActive");
 	ctrl->setParamNormalized (fairklaus::kParamPower, 1.0);
 
-	IPlugView* view = comp->createView (ViewType::kEditor);
+	IPlugView* view = ctrl->createView (ViewType::kEditor);
 	expect (view != nullptr, "createView(Editor) liefert View");
 	if (view)
 	{
-		expect (view->isPlatformTypeSupported (VSTGUI::kPlatformTypeX11EmbedWindowID) == kResultTrue,
+		expect (view->isPlatformTypeSupported (Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
 		        "X11EmbedWindowID unterstuetzt");
-		expect (view->attached (nullptr, VSTGUI::kPlatformTypeX11EmbedWindowID) == kResultTrue,
+		expect (view->attached (nullptr, Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
 		        "attached (Editor in X11-Fenster geoeffnet)");
 		ViewRect sz {};
 		view->getSize (&sz);
@@ -84,7 +84,7 @@ int main ()
 
 		// Reaper oeffnet/schliesst Fenster ggf. mehrfach -> re-attach testen
 		expect (view->removed () == kResultTrue, "removed (close)");
-		expect (view->attached (nullptr, VSTGUI::kPlatformTypeX11EmbedWindowID) == kResultTrue,
+		expect (view->attached (nullptr, Steinberg::kPlatformTypeX11EmbedWindowID) == kResultTrue,
 		        "re-attached nach removed");
 		view->getSize (&sz);
 		expect (std::fabs ((sz.right - sz.left) - 1058) < 4, "nach re-attach wieder 1058 breit");
