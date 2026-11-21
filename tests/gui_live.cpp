@@ -45,7 +45,7 @@
 void* moduleHandle = nullptr;
 
 // minimaler IRunLoop fuers Test-Host-Seite (echte DAW pumpt hier X-Events/Timer)
-struct TestRunLoop : VSTGUI::IRunLoop
+struct TestRunLoop : VSTGUI::CBaseObject, VSTGUI::IRunLoop
 {
 	bool registerEventHandler (int, VSTGUI::IEventHandler*) override { return true; }
 	bool unregisterEventHandler (VSTGUI::IEventHandler*) override { return true; }
