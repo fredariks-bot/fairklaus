@@ -34,7 +34,7 @@ jobs:
       - name: Tests (DSP + Host-Simulation + GUI-Smoke)
         run: cd build && ctest --output-on-failure
 
-      - name: GUI-Live-Test (Editor in echtem X11-Fenster via xvfb: attach/resize/detach/re-attach)
+      - name: GUI-Live-Test (Editor in echtem X11-Fenster via xvfb, attach/resize/detach/re-attach)
         run: xvfb-run -a ./build/tests/gui_live
 
       - name: VST3 SDK Validator
