@@ -16,6 +16,7 @@
 #pragma once
 
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <vector>
 
@@ -75,9 +76,9 @@ struct Fairchild670
 	void setThreshold (double thrDb)
 	{
 		double p = (thrDb + 20.0) / 30.0;
-		phiAC = p < 0.0 ? 0.0 : (p > 1.0 ? 1.0 : p);
-		scL.setPhiAC (phiAC);
-		scR.setPhiAC (phiAC);
+		phiAC.store (p < 0.0 ? 0.0 : (p > 1.0 ? 1.0 : p));
+		scL.setPhiAC (phiAC.load ());
+		scR.setPhiAC (phiAC.load ());
 	}
 
 	void setMainsHz (double hz) { mainsHz = hz; }
@@ -209,7 +210,7 @@ private:
 	double voutLPrev = 0.0, voutRPrev = 0.0;
 	double peakIn = 0.0, peakOut = 0.0, peakDecay = 0.999;
 	double grSmooth = 0.0;
-	double phiAC = 0.0;
+	std::atomic<double> phiAC { 0.0 };   // UI-Thread schreibt, Audio-Thread liest
 	int tcPos = 5;
 	double mainsHz = 60.0;
 	double psuPhase = 0.0;

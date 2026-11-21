@@ -214,6 +214,23 @@ int main ()
 	std::printf ("power nach Klick = %.1f\n", powVal);
 	expect (powVal == 0.0, "Power-Schalter toggelt auf OFF");
 
+	// --- View-Lifecycle ueber die Host-Schnittstelle (createView/onSize/release) ---
+	{
+		IPlugView* view = comp->createView (ViewType::kEditor);
+		expect (view != nullptr, "createView(Editor) liefert View");
+		if (view)
+		{
+			expect (view->canResize () == kResultTrue, "canResize true");
+			ViewRect vr (0, 0, 2116, 594);
+			view->onSize (&vr);   // ohne geoeffnetes Frame: nur Rect uebernehmen
+			ViewRect sz {};
+			view->getSize (&sz);
+			std::printf ("size nach onSize = %d x %d\n", (int) (sz.right - sz.left), (int) (sz.bottom - sz.top));
+			expect (sz.right - sz.left == 2116, "onSize uebernimmt Groesse (Frame noch zu)");
+			view->release ();
+		}
+	}
+
 	VSTGUI::exitPlatform ();
 	editor->forget ();
 	comp->setActive (false);

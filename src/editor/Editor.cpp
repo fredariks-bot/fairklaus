@@ -454,9 +454,12 @@ void PLUGIN_API PanelEditor::close ()
 	if (frame)
 	{
 		frame->close ();
-		frame->forget ();
+		frame->forget ();   // CFrame-Destruktor ist protected -> forget()
 		frame = nullptr;
 	}
+	// frame hat seine Child-Views (inkl. panel) beim Zerstoeren freigegeben
+	// -> Pointer zuruecksetzen, damit pollParameters() nichts Hängendes benutzt.
+	panel = nullptr;
 }
 
 VSTGUI::CMessageResult PanelEditor::notify (VSTGUI::CBaseObject* sender, const char* message)
@@ -468,7 +471,8 @@ VSTGUI::CMessageResult PanelEditor::notify (VSTGUI::CBaseObject* sender, const c
 
 void PanelEditor::pollParameters ()
 {
-	if (panel && panel->meter && processor)
+	if (!processor || !frame || !panel) return;   // nach close() nichts mehr anfassen
+	if (panel->meter)
 	{
 		panel->meter->setGainReduction (processor->currentGainReductionDb ());
 		panel->meter->setDirty ();

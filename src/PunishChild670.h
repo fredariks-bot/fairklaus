@@ -65,15 +65,16 @@ private:
 	double sampleRate = 44100.0;
 	bool active = false;
 
-	// geglättete Werte (Vermeidung von Clicks bei Parameterwechseln)
-	double inputGainLin = 1.0, outputGainLin = 1.0, trimLin = 1.0;
-	double inputGainSmooth = 1.0, trimSmooth = 1.0;   // geglaettet gegen Clicks
-	int osFactor = 4;   // Default 4x (CPU); ueber Parameter 1/2/4/8x
+	// Werte, die process() (Audio-Thread) liest und setParamNormalized/setState
+	// (UI-/Main-Thread) schreibt -> atomar, damit kein formaler Data-Race bleibt.
+	std::atomic<double> inputGainLin { 1.0 }, outputGainLin { 1.0 }, trimLin { 1.0 };
+	std::atomic<double> powerTarget { 1.0 };
+	std::atomic<int> osFactor { 4 };   // Default 4x (CPU); ueber Parameter 1/2/4/8x
 	// OS/TC duerfen das Modell nicht vom UI-Thread umschalten (setSampleRate
 	// allokiert, TC rewired die WDF-Adaptoren) -> process() wendet sie an:
 	std::atomic<int> pendingTcPos { -1 };
-	double powerMix = 1.0;      // 1 = an, 0 = Bypass
-	double powerTarget = 1.0;
+	double powerMix = 1.0;      // 1 = an, 0 = Bypass (nur setActive/process)
+	double inputGainSmooth = 1.0, trimSmooth = 1.0;   // nur setActive/process
 
 	std::atomic<float> grForMeter { 0.0f };
 

@@ -18,6 +18,7 @@
 //=============================================================================
 #pragma once
 
+#include <atomic>
 #include <cmath>
 #include "WdfTransformer.h"
 
@@ -52,8 +53,9 @@ struct Sidechain
 
 	void setSampleRate (double fs) { input.setSampleRate (fs); }
 
-	// phiAC: 0..1 (Threshold-Poti). Rückgabe: Isc (in das Zeitkonstanten-Netzwerk).
-	void setPhiAC (double phi) { phiAC = phi < 0.0 ? 0.0 : (phi > 1.0 ? 1.0 : phi); }
+	// phiAC: 0..1 (Threshold-Poti). Rueckgabe: Isc (in das Zeitkonstanten-Netzwerk).
+	// atomar: wird vom UI-Thread (setParamNormalized) geschrieben, vom Audio-Thread gelesen.
+	void setPhiAC (double phi) { phiAC.store (phi < 0.0 ? 0.0 : (phi > 1.0 ? 1.0 : phi)); }
 
 	// vSensed = abgetastete Ausgangsspannung Vout; vscDelayed = Vsc(t-1)
 	double process (double vSensed, double vscDelayed)
@@ -73,7 +75,7 @@ struct Sidechain
 	}
 
 	InputCircuit input;
-	double phiAC = 0.0;
+	std::atomic<double> phiAC { 0.0 };
 	double dbgVRload = 0.0;
 };
 

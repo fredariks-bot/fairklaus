@@ -1,0 +1,662 @@
+[
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/baseiids.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/baseiids.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/baseiids.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/baseiids.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/fbuffer.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fbuffer.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fbuffer.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/fbuffer.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/fdebug.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fdebug.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fdebug.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/fdebug.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/fdynlib.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fdynlib.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fdynlib.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/fdynlib.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/fobject.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fobject.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fobject.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/fobject.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/fstreamer.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fstreamer.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fstreamer.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/fstreamer.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/fstring.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fstring.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/fstring.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/fstring.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/timer.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/timer.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/timer.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/timer.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/source/updatehandler.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/updatehandler.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/source/updatehandler.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/source/updatehandler.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/thread/source/fcondition.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/thread/source/fcondition.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/thread/source/fcondition.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/thread/source/fcondition.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/base.dir/base/thread/source/flock.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/base/thread/source/flock.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/base/thread/source/flock.cpp",
+  "output": "vst3sdk/CMakeFiles/base.dir/base/thread/source/flock.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -o CMakeFiles/pluginterfaces.dir/pluginterfaces/base/conststringtable.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/conststringtable.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/conststringtable.cpp",
+  "output": "vst3sdk/CMakeFiles/pluginterfaces.dir/pluginterfaces/base/conststringtable.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -o CMakeFiles/pluginterfaces.dir/pluginterfaces/base/coreiids.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/coreiids.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/coreiids.cpp",
+  "output": "vst3sdk/CMakeFiles/pluginterfaces.dir/pluginterfaces/base/coreiids.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -o CMakeFiles/pluginterfaces.dir/pluginterfaces/base/funknown.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/funknown.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/funknown.cpp",
+  "output": "vst3sdk/CMakeFiles/pluginterfaces.dir/pluginterfaces/base/funknown.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -o CMakeFiles/pluginterfaces.dir/pluginterfaces/base/ustring.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/ustring.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/pluginterfaces/base/ustring.cpp",
+  "output": "vst3sdk/CMakeFiles/pluginterfaces.dir/pluginterfaces/base/ustring.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/commoniids.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/commoniids.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/commoniids.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/commoniids.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/commonstringconvert.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/commonstringconvert.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/commonstringconvert.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/commonstringconvert.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/openurl.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/openurl.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/openurl.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/openurl.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/systemclipboard_linux.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/systemclipboard_linux.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/systemclipboard_linux.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/systemclipboard_linux.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/systemclipboard_win32.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/systemclipboard_win32.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/systemclipboard_win32.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/systemclipboard_win32.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/threadchecker_linux.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/threadchecker_linux.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/threadchecker_linux.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/threadchecker_linux.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/threadchecker_win32.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/threadchecker_win32.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/threadchecker_win32.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/threadchecker_win32.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/common/readfile.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/readfile.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/readfile.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/common/readfile.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_common.dir/public.sdk/source/vst/vstpresetfile.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstpresetfile.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstpresetfile.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_common.dir/public.sdk/source/vst/vstpresetfile.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/common/pluginview.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/pluginview.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/pluginview.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/common/pluginview.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/main/pluginfactory.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/pluginfactory.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/pluginfactory.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/main/pluginfactory.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/main/moduleinit.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/moduleinit.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/moduleinit.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/main/moduleinit.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/utility/dataexchange.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/dataexchange.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/dataexchange.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/utility/dataexchange.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/utility/stringconvert.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/stringconvert.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/stringconvert.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/utility/stringconvert.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/utility/systemtime.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/systemtime.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/systemtime.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/utility/systemtime.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/utility/testing.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/testing.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/testing.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/utility/testing.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/utility/vst2persistence.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/vst2persistence.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/vst2persistence.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/utility/vst2persistence.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstaudioeffect.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstaudioeffect.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstaudioeffect.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstaudioeffect.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstbus.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstbus.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstbus.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstbus.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstcomponent.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstcomponent.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstcomponent.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstcomponent.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstcomponentbase.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstcomponentbase.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstcomponentbase.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstcomponentbase.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vsteditcontroller.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vsteditcontroller.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vsteditcontroller.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vsteditcontroller.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstinitiids.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstinitiids.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstinitiids.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstinitiids.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstnoteexpressiontypes.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstnoteexpressiontypes.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstnoteexpressiontypes.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstnoteexpressiontypes.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstparameters.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstparameters.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstparameters.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstparameters.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk.dir/public.sdk/source/vst/vstrepresentation.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstrepresentation.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstrepresentation.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk.dir/public.sdk/source/vst/vstrepresentation.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/connectionproxy.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/connectionproxy.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/connectionproxy.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/connectionproxy.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/eventlist.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/eventlist.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/eventlist.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/eventlist.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/hostclasses.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/hostclasses.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/hostclasses.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/hostclasses.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/module.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/module.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/module.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/module.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/parameterchanges.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/parameterchanges.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/parameterchanges.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/parameterchanges.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/pluginterfacesupport.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/pluginterfacesupport.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/pluginterfacesupport.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/pluginterfacesupport.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/processdata.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/processdata.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/processdata.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/hosting/processdata.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/utility/stringconvert.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/stringconvert.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/stringconvert.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/utility/stringconvert.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/vstinitiids.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstinitiids.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstinitiids.cpp",
+  "output": "vst3sdk/CMakeFiles/sdk_hosting.dir/public.sdk/source/vst/vstinitiids.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/common/memorystream.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/memorystream.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/common/memorystream.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/common/memorystream.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/main/moduleinit.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/moduleinit.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/moduleinit.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/main/moduleinit.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/moduleinfo/moduleinfoparser.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/moduleinfo/moduleinfoparser.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/moduleinfo/moduleinfoparser.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/moduleinfo/moduleinfoparser.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/connectionproxytest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/connectionproxytest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/connectionproxytest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/connectionproxytest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/eventlisttest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/eventlisttest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/eventlisttest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/eventlisttest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/hostclassestest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/hostclassestest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/hostclassestest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/hostclassestest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/miditovsttest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/miditovsttest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/miditovsttest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/miditovsttest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/parameterchangestest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/parameterchangestest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/parameterchangestest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/parameterchangestest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/pluginterfacesupporttest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/pluginterfacesupporttest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/pluginterfacesupporttest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/pluginterfacesupporttest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/processdatatest.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/processdatatest.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/test/processdatatest.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/test/processdatatest.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/plugprovider.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/plugprovider.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/plugprovider.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/plugprovider.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/busactivation.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/busactivation.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/busactivation.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/busactivation.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/busconsistency.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/busconsistency.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/busconsistency.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/busconsistency.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/businvalidindex.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/businvalidindex.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/businvalidindex.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/businvalidindex.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/checkaudiobusarrangement.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/checkaudiobusarrangement.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/checkaudiobusarrangement.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/checkaudiobusarrangement.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/scanbusses.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/scanbusses.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/scanbusses.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/scanbusses.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/sidechainarrangement.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/sidechainarrangement.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/bus/sidechainarrangement.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/bus/sidechainarrangement.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/editorclasses.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/editorclasses.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/editorclasses.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/editorclasses.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/midilearn.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/midilearn.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/midilearn.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/midilearn.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/midimapping.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/midimapping.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/midimapping.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/midimapping.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/plugcompat.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/plugcompat.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/plugcompat.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/plugcompat.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/scanparameters.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/scanparameters.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/scanparameters.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/scanparameters.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/suspendresume.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/suspendresume.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/suspendresume.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/suspendresume.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/terminit.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/terminit.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/general/terminit.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/general/terminit.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/noteexpression/keyswitch.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/noteexpression/keyswitch.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/noteexpression/keyswitch.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/noteexpression/keyswitch.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/noteexpression/noteexpression.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/noteexpression/noteexpression.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/noteexpression/noteexpression.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/noteexpression/noteexpression.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/automation.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/automation.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/automation.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/automation.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/process.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/process.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/process.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/process.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processcontextrequirements.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processcontextrequirements.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processcontextrequirements.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processcontextrequirements.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processformat.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processformat.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processformat.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processformat.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processinputoverwriting.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processinputoverwriting.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processinputoverwriting.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processinputoverwriting.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processtail.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processtail.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processtail.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processtail.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processthreaded.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processthreaded.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/processthreaded.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/processthreaded.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/silenceflags.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/silenceflags.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/silenceflags.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/silenceflags.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/silenceprocessing.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/silenceprocessing.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/silenceprocessing.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/silenceprocessing.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/speakerarrangement.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/speakerarrangement.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/speakerarrangement.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/speakerarrangement.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/variableblocksize.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/variableblocksize.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/processing/variableblocksize.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/processing/variableblocksize.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/bypasspersistence.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/bypasspersistence.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/bypasspersistence.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/bypasspersistence.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/invalidstatetransition.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/invalidstatetransition.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/invalidstatetransition.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/invalidstatetransition.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/repeatidenticalstatetransition.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/repeatidenticalstatetransition.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/repeatidenticalstatetransition.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/repeatidenticalstatetransition.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/validstatetransition.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/validstatetransition.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/state/validstatetransition.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/state/validstatetransition.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/testbase.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/testbase.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/testbase.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/testbase.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/unit/checkunitstructure.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/unit/checkunitstructure.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/unit/checkunitstructure.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/unit/checkunitstructure.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/unit/scanprograms.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/unit/scanprograms.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/unit/scanprograms.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/unit/scanprograms.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/unit/scanunits.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/unit/scanunits.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/unit/scanunits.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/unit/scanunits.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/vsttestsuite.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/vsttestsuite.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/testsuite/vsttestsuite.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/testsuite/vsttestsuite.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/utility/testing.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/testing.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/utility/testing.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/utility/testing.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/source/main.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-hosting/validator/source/main.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-hosting/validator/source/main.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/source/main.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/source/usediids.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-hosting/validator/source/usediids.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-hosting/validator/source/usediids.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/source/usediids.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/source/validator.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-hosting/validator/source/validator.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-hosting/validator/source/validator.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/source/validator.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-hosting/validator",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/validator.dir/__/__/__/source/vst/hosting/module_linux.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/module_linux.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/module_linux.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-hosting/validator/CMakeFiles/validator.dir/__/__/__/source/vst/hosting/module_linux.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/moduleinfotool.dir/source/main.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool/source/main.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool/source/main.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool/CMakeFiles/moduleinfotool.dir/source/main.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/moduleinfotool.dir/__/__/__/source/vst/moduleinfo/moduleinfocreator.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/moduleinfo/moduleinfocreator.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/moduleinfo/moduleinfocreator.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool/CMakeFiles/moduleinfotool.dir/__/__/__/source/vst/moduleinfo/moduleinfocreator.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/moduleinfotool.dir/__/__/__/source/vst/moduleinfo/moduleinfoparser.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/moduleinfo/moduleinfoparser.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/moduleinfo/moduleinfoparser.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool/CMakeFiles/moduleinfotool.dir/__/__/__/source/vst/moduleinfo/moduleinfoparser.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -Wno-multichar -g -std=gnu++17 -fPIE -fvisibility=hidden -fvisibility-inlines-hidden -DSMTG_RENAME_ASSERT=1 -Wsuggest-override -DDEVELOPMENT=1 -o CMakeFiles/moduleinfotool.dir/__/__/__/source/vst/hosting/module_linux.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/module_linux.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/hosting/module_linux.cpp",
+  "output": "vst3sdk/public.sdk/samples/vst-utilities/moduleinfotool/CMakeFiles/moduleinfotool.dir/__/__/__/source/vst/hosting/module_linux.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/src",
+  "command": "/usr/bin/c++ -Dpunishchild670_EXPORTS -I/workspace/github__fredariks-bot__fairklaus/src -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -g -std=gnu++17 -fPIC -DDEVELOPMENT=1 -o CMakeFiles/punishchild670.dir/__/vst3sdk/public.sdk/source/vst/vstsinglecomponenteffect.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstsinglecomponenteffect.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/vst/vstsinglecomponenteffect.cpp",
+  "output": "src/CMakeFiles/punishchild670.dir/__/vst3sdk/public.sdk/source/vst/vstsinglecomponenteffect.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/src",
+  "command": "/usr/bin/c++ -Dpunishchild670_EXPORTS -I/workspace/github__fredariks-bot__fairklaus/src -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -g -std=gnu++17 -fPIC -DDEVELOPMENT=1 -o CMakeFiles/punishchild670.dir/PunishChild670.cpp.o -c /workspace/github__fredariks-bot__fairklaus/src/PunishChild670.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/src/PunishChild670.cpp",
+  "output": "src/CMakeFiles/punishchild670.dir/PunishChild670.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/src",
+  "command": "/usr/bin/c++ -Dpunishchild670_EXPORTS -I/workspace/github__fredariks-bot__fairklaus/src -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -g -std=gnu++17 -fPIC -DDEVELOPMENT=1 -o CMakeFiles/punishchild670.dir/__/vst3sdk/public.sdk/source/main/linuxmain.cpp.o -c /workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/linuxmain.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/vst3sdk/public.sdk/source/main/linuxmain.cpp",
+  "output": "src/CMakeFiles/punishchild670.dir/__/vst3sdk/public.sdk/source/main/linuxmain.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/tests",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/src -fsanitize=address -fno-omit-frame-pointer -g -g -std=gnu++17 -fPIE -o CMakeFiles/test_dsp.dir/test_dsp.cpp.o -c /workspace/github__fredariks-bot__fairklaus/tests/test_dsp.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/tests/test_dsp.cpp",
+  "output": "tests/CMakeFiles/test_dsp.dir/test_dsp.cpp.o"
+},
+{
+  "directory": "/workspace/github__fredariks-bot__fairklaus/build-asan/tests",
+  "command": "/usr/bin/c++  -I/workspace/github__fredariks-bot__fairklaus/src -I/workspace/github__fredariks-bot__fairklaus/vst3sdk -fsanitize=address -fno-omit-frame-pointer -g -g -std=gnu++17 -fPIE -DDEVELOPMENT=1 -o CMakeFiles/host_sim.dir/host_sim.cpp.o -c /workspace/github__fredariks-bot__fairklaus/tests/host_sim.cpp",
+  "file": "/workspace/github__fredariks-bot__fairklaus/tests/host_sim.cpp",
+  "output": "tests/CMakeFiles/host_sim.dir/host_sim.cpp.o"
+}
+]
