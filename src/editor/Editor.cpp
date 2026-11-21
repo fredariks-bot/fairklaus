@@ -316,7 +316,8 @@ void PanelView::draw (CDrawContext* ctx)
 	ctx->setFont (fontSmall);
 	ctx->setFontColor (kLabelWhite);
 	ctx->drawString ("ON",   CRect (20, 4, 110, 20), kLeftText);
-	ctx->drawString ("OS", CRect (30, 228, 110, 244), kLeftText);
+	ctx->drawString ("OS", CRect (84, 152, 124, 168), kLeftText);
+	ctx->drawString ("AUTO", CRect (84, 200, 140, 216), kLeftText);
 	ctx->drawString ("OFF",  CRect (20, 78, 110, 94), kLeftText);
 
 	// gelbe Lampe unter dem Power-Schalter
@@ -369,7 +370,8 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	panel->knobTimeConst->setDetents (5);   // rastet bei 1..5 ein
 	panel->knobOutput    = new KnobControl (CRect (795 - kRad, kCy - kRad, 795 + kRad, kCy + kRad), this, kParamOutputGain);
 	panel->knobTrim      = new KnobControl (CRect (945 - kRad, kCy - kRad, 945 + kRad, kCy + kRad), this, kParamTrim);
-	panel->osSel = new OsSelector (CRect (52, 158, 78, 206), this, kParamOversampling);
+	panel->osSel = new OsSelector (CRect (52, 146, 78, 184), this, kParamOversampling);
+	panel->swAuto = new SwitchControl (CRect (52, 192, 78, 230), this, kParamAuto);
 	panel->swPower = new SwitchControl (CRect (52, 22, 78, 76), this, kParamPower);
 	panel->meter   = new VuMeterView (CRect (120, 25, 312, 225));
 
@@ -379,6 +381,7 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	frame->addView (panel->knobOutput);
 	frame->addView (panel->knobTrim);
 	frame->addView (panel->osSel);
+	frame->addView (panel->swAuto);
 	frame->addView (panel->swPower);
 	frame->addView (panel->meter);
 
@@ -392,6 +395,7 @@ bool PLUGIN_API PanelEditor::open (void* parent, const PlatformType& platformTyp
 	sync (panel->knobTrim, kParamTrim);
 	sync (panel->swPower, kParamPower);
 	sync (panel->osSel, kParamOversampling);
+	sync (panel->swAuto, kParamAuto);
 
 	if (!frame->open (parent, platformType))
 	{
@@ -465,6 +469,7 @@ void PanelEditor::pollParameters ()
 	sync (panel->knobTrim, kParamTrim);
 		sync (panel->swPower, kParamPower);
 	sync (panel->osSel, kParamOversampling);
+	sync (panel->swAuto, kParamAuto);
 			panel->setDirty ();
 	}
 }

@@ -151,6 +151,40 @@ int main ()
 	std::printf ("os nach Klick = %.2f (1.0 = 8x)\n", osVal);
 	expect (osVal > 0.99, "OS-Umschalter klickt auf 8x (norm 1.0)");
 
+	// --- AUTO-Gain: an -> Trim/Input-Parameter bewegen sich ---
+	{
+		ctrl->setParamNormalized (fairklaus::kParamThreshold, 0.0);
+		ctrl->setParamNormalized (fairklaus::kParamTrim, 1.0);       // 0 dB
+		ctrl->setParamNormalized (fairklaus::kParamInputGain, 0.0);  // 0 dB
+		ctrl->setParamNormalized (fairklaus::kParamAuto, 1.0);
+		const double trimBefore = ctrl->getParamNormalized (fairklaus::kParamTrim);
+		// lautes Signal durch process() -> AUTO senkt Trim
+		const int32 N = 256;
+		std::vector<Sample32> inL (N), inR (N), outL (N), outR (N);
+		Sample32* inCh[2] = { inL.data (), inR.data () };
+		Sample32* outCh[2] = { outL.data (), outR.data () };
+		AudioBusBuffers inB, outB;
+		inB.numChannels = 2; inB.silenceFlags = 0; inB.channelBuffers32 = inCh;
+		outB.numChannels = 2; outB.silenceFlags = 0; outB.channelBuffers32 = outCh;
+		AudioBusBuffers inA[1] = { inB }, outA[1] = { outB };
+		for (int b = 0; b < 300; ++b)
+		{
+			for (int i = 0; i < N; ++i)
+			{
+				double x = 0.9 * std::sin (2 * M_PI * 1000 * (b * N + i) / 48000.0);
+				inL[i] = (Sample32) x; inR[i] = (Sample32) x;
+			}
+			ProcessData d {};
+			d.processMode = kRealtime; d.symbolicSampleSize = kSample32; d.numSamples = N;
+			d.numInputs = 1; d.numOutputs = 1; d.inputs = inA; d.outputs = outA;
+			ap->process (d);
+		}
+		const double trimAfter = ctrl->getParamNormalized (fairklaus::kParamTrim);
+		std::printf ("auto: trim %.3f -> %.3f\n", trimBefore, trimAfter);
+		expect (trimAfter < trimBefore - 0.01, "AUTO-Gain bewegt den Trim-Knopf (laut -> leiser)");
+		ctrl->setParamNormalized (fairklaus::kParamAuto, 0.0);
+	}
+
 	// --- Power-Schalter: Klick toggelt auf 0 ---
 	fairklaus::SwitchControl sw (VSTGUI::CRect (52, 22, 78, 76), editor, fairklaus::kParamPower);
 	sw.setValueNormalized (1.0f);

@@ -192,7 +192,7 @@ private:
 	double iaRestL = 1e-6, iaRestR = 1e-6;
 	double grSmooth = 0.0;
 	double phiAC = 0.0;
-	int tcPos = 3;
+	int tcPos = 5;
 	double mainsHz = 60.0;
 	double psuPhase = 0.0;
 };

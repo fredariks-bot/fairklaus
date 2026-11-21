@@ -17,6 +17,7 @@ enum ParamID : Steinberg::Vst::ParamID
 	kParamOversampling,    // 1x/2x/4x/8x (Paper: 8x) — nicht auf dem Panel
 	kParamStereoMode,      // L/R oder M/S (Lateral/Vertical) — nicht auf dem Panel
 	kParamTrim,            // TRIM -24..0 dB (Ausgangs-Lautstaerke, nur leiser)
+	kParamAuto,            // AUTO-Gain an/aus (regelt Input Gain + Trim automatisch)
 	kNumParams
 };
 
